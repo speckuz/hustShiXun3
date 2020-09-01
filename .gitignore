@@ -1,0 +1,27 @@
+#Compiled Java Classes
+*.class
+
+#Java Archives
+*.jar
+*.war
+*.ear
+
+#IDE & Compiler Directories
+.vscode/
+.vs/
+.gradle/
+.idea/
+
+#Compiled Android Binary
+*.apk
+*.ap_
+*.dex
+
+#Build Directories
+bin/
+gen/
+out/
+build/
+
+#Android Local Configurations
+local.properties

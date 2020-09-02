@@ -25,3 +25,6 @@ build/
 
 #Android Local Configurations
 local.properties
+
+#Personal Project Directory
+personal/

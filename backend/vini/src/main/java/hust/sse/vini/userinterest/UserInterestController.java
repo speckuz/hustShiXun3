@@ -37,16 +37,17 @@ public class UserInterestController {
         }
         return APIReturn.successfulResult(null);
     }
-
     // 查询兴趣
     @GetMapping(path = "interest/getAllByUserId")
     public APIReturn queryUserInterests(@RequestParam(name = "userId")Integer userId){
         // queryInterests表示查询后返回的UserInterests的List, interests则是提取出queryInterests中的兴趣String作为List集合
+        UserInfo userInfo=userInfoRepository.getByUserId(userId);
+        // 想要查询兴趣的用户尚未注册
+        if(null==userInfo){
+            return APIReturn.apiError(404, "User not registered.");
+        }
         List<UserInterest> queryInterests = userInterestRepository.getAllInterestsByUserId(userId);
         List<String> interests=new ArrayList<>();
-        if(null==queryInterests){
-            return APIReturn.apiError(404, "User not existed.");
-        }
         for(UserInterest userInterest:queryInterests){
             interests.add(userInterest.getSingleInterest());
         }

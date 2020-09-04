@@ -22,7 +22,7 @@ public class UserInfoController {
 
     @GetMapping(path = "/user/exists")
     public APIReturn userExists(@RequestParam(name="userName") String userName){
-        UserInfo userId=userInfoRepo.getByUserName(userName);
+            UserInfo userId=userInfoRepo.getByUserName(userName);
         if(userId==null){
             return APIReturn.successfulResult(false);
         }else{

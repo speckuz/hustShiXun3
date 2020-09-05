@@ -4,8 +4,6 @@ import hust.sse.vini.APIReturn;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.SQLIntegrityConstraintViolationException;
-
 @RestController
 public class UserInfoController {
     @Autowired

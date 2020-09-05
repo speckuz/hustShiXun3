@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+
+    tools:context=".ChatList">
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <ImageButton
+
+            android:id="@+id/profilePicture"
+            android:src="@drawable/head"
+            android:layout_width="60dp"
+            android:layout_height="60dp"/>
+
+
+        <TextView
+            android:layout_gravity="center"
+            android:textSize="30dp"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="recentChat"
+            android:textColor="#000" />
+        <ImageButton
+            android:id="@+id/releaseMoment"
+            android:src="@drawable/add_friend_or_group"
+            android:scaleType="fitCenter"
+            android:background="@color/colorAlpha"
+            android:layout_width="60dp"
+            android:layout_height="60dp"/>
+
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/chatList"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+
+    </ListView>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="bottom"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/toChatList"
+            android:background="@color/colorAlpha"
+            android:src="@drawable/recentchatlist1"
+            android:layout_width="140dp"
+            android:scaleType="fitCenter"
+            android:layout_height="50dp"/>
+        <ImageButton
+            android:id="@+id/toFriendList"
+            android:scaleType="fitCenter"
+            android:src="@drawable/friendlist0"
+            android:layout_weight="1"
+            android:background="@color/colorAlpha"
+            android:layout_width="0dp"
+            android:layout_height="50dp"/>
+        <ImageButton
+            android:background="@color/colorAlpha"
+            android:id="@+id/toMoment"
+            android:scaleType="fitCenter"
+            android:src="@drawable/moment0"
+            android:layout_width="140dp"
+            android:layout_height="50dp"/>
+    </LinearLayout>
+</LinearLayout>

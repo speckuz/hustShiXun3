@@ -2,9 +2,6 @@ package hust.sse.vini.userpart.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.nio.file.attribute.UserPrincipal;
-import java.util.Date;
 import java.util.List;
 
 @RestController

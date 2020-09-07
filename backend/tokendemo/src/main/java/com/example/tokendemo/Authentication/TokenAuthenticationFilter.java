@@ -14,7 +14,7 @@ import java.io.IOException;
 
 public class TokenAuthenticationFilter extends OncePerRequestFilter {
 
-    private static final String token_header="Authentication";
+    private static final String token_header="Authorization";
 
     @Override
     protected void doFilterInternal(
@@ -25,7 +25,7 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
         String token=request.getHeader(token_header);
         if(token!=null && token.startsWith("Bearer")){
             token=token.replaceFirst("Bearer","");
-            String userId=JWT.decode(token).getAudience().get(0);
+            String userName=JWT.decode(token).getAudience().get(0);
             JWTVerifier jv=JWT.require(Algorithm.HMAC256("Vini-Passwd")).build();
             jv.verify(token);
             filterChain.doFilter(request,response);

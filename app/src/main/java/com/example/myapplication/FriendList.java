@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -39,11 +40,24 @@ public class FriendList extends AppCompatActivity {
         toMoment = (ImageButton) findViewById(R.id.toMoment);
         friendList = (ListView) findViewById(R.id.friendList);
         friendLists = new ArrayList<Friend>();
-        friendLists.add(new Friend("11","22"));
-        friendLists.add(new Friend("1122","232"));
+        friendLists.add(new Friend("123","11","22"));
+        friendLists.add(new Friend("456","1122","232"));
         adapter = new FriendListAdapter(friendLists,this);
         friendList.setAdapter(adapter);
 
+        friendList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                Friend friend = friendLists.get(i);
+                Intent intent = new Intent(FriendList.this,FriendInf.class);
+                Bundle bundle=new Bundle();
+                bundle.putString("id", friend.getId());
+                intent.putExtras(bundle);
+
+                startActivity(intent);
+            }
+        });
         toChatList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

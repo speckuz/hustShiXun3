@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -29,14 +30,27 @@ public class ChatList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_list);
         recentChatLists = new ArrayList<RecentChatList>();
-        recentChatLists.add(new RecentChatList("123","223"));
-        recentChatLists.add(new RecentChatList("123","223"));
-        recentChatLists.add(new RecentChatList("123","223"));
+        recentChatLists.add(new RecentChatList("123","123","223"));
+        recentChatLists.add(new RecentChatList("234","123","223"));
+        recentChatLists.add(new RecentChatList("57","123","223"));
         chatList = (ListView) findViewById(R.id.chatList);
 
         adapter = new ChatListAdapter(recentChatLists,this);
         chatList.setAdapter(adapter);
 
+        chatList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                RecentChatList recentChatList = recentChatLists.get(i);
+                Intent intent = new Intent(ChatList.this,Chat.class);
+                Bundle bundle=new Bundle();
+                bundle.putString("id", recentChatList.getUserName());
+                intent.putExtras(bundle);
+
+                startActivity(intent);
+            }
+        });
         //查看我的信息
         profilePicture = (ImageButton) findViewById(R.id.profilePicture);
         profilePicture.setOnClickListener(new View.OnClickListener() {

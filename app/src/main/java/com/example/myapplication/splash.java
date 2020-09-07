@@ -21,7 +21,7 @@ public class splash extends AppCompatActivity {
                 new Thread(){
                     @Override
                     public void run() {
-                        startActivity(new Intent( splash.this,Chat.class));
+                        startActivity(new Intent( splash.this,ChatList.class));
                         finish();
                     }
                 }.start();

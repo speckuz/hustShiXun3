@@ -2,6 +2,7 @@ package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -14,6 +15,7 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 import Inf.ChatRecord;
+import Inf.Friend;
 import adapter.ChatAdapter;
 import webService.OkHttp;
 
@@ -28,6 +30,7 @@ public class Chat extends AppCompatActivity {
     private ImageButton voiceMessage;
     private ImageButton more;
     private String message;
+    private String id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +39,11 @@ public class Chat extends AppCompatActivity {
     }
     public void initView(){
         //聊天记录
+
+        Bundle bundle = this.getIntent().getExtras();
+        id = bundle.getString("id");
+        System.out.println(id);
+
         chatRecords = new ArrayList<ChatRecord>();
         chatRecords.add(new ChatRecord("123",true));
         chatRecords.add(new ChatRecord("123",false));
@@ -59,20 +67,25 @@ public class Chat extends AppCompatActivity {
                 finish();
             }
         });
-        //发送语音
 
+        //发送语音
         voiceMessage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
             }
         });
-        //获取更多
 
+
+        //获取更多
         more.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent( Chat.this,FriendInf.class));
+                Intent intent = new Intent(Chat.this,FriendInf.class);
+                Bundle bundle=new Bundle();
+                bundle.putString("id", id);
+                intent.putExtras(bundle);
+                startActivity(intent);
             }
         });
 
@@ -103,4 +116,6 @@ public class Chat extends AppCompatActivity {
         chatRecord.smoothScrollToPosition(chatRecords.size());
 
     }
+
+
 }

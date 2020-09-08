@@ -1,8 +1,11 @@
 package hust.sse.vini.userpart.user;
-
+import hust.sse.vini.userpart.token.TokenUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class UserController {
@@ -36,6 +39,23 @@ public class UserController {
             return APIReturn.apiError(404, "No such user!");
         }
         return APIReturn.successfulResult(user);
+    }
+
+    @PostMapping(path = "/login")
+    public APIReturn userLogin(@RequestBody User user){
+        User queryUser = userRepository.getUserByUserName(user.getUserName());
+        if(null==queryUser){
+            return APIReturn.apiError(401, "No such user!");
+        }
+        if(!queryUser.getPasswordHash().equals(user.getPasswordHash())){
+            return APIReturn.apiError(404, "Wrong password");
+        }
+        Map<String, Object> userIdAndToken = new HashMap<>();
+        String token = TokenUtils.generateToken(queryUser.getUserId());
+        userIdAndToken.put("userId", queryUser.getUserId());
+        userIdAndToken.put("token", token);
+
+        return APIReturn.successfulResult(userIdAndToken);
     }
     //修改用户信息
     @PostMapping(path = "/user/update")

@@ -13,6 +13,7 @@ public class FriendInf extends AppCompatActivity {
 
     Button send;
     Friend friend;
+    String id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,6 +21,8 @@ public class FriendInf extends AppCompatActivity {
         initView();
     }
     void initView(){
+        Bundle bundle = this.getIntent().getExtras();
+        id = bundle.getString("id");
         friend = new Friend("1","123","123");
         send = findViewById(R.id.send);
         send.setOnClickListener(new View.OnClickListener(){

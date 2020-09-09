@@ -1,13 +1,8 @@
-package hust.sse.vini.userpart.user;
-
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+package com.example.logindemo;
 
 public class APIReturn {
     private Integer statusCode;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String errMsg;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Object result;
 
     public static APIReturn apiError(Integer statusCode, String errMsg) {

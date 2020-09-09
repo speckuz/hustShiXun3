@@ -1,10 +1,11 @@
 package hust.sse.vini.userpart.user;
-
+import hust.sse.vini.userpart.token.TokenUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class UserController {
@@ -39,48 +40,50 @@ public class UserController {
         }
         return APIReturn.successfulResult(user);
     }
+
+    @PostMapping(path = "/login")
+    public APIReturn userLogin(@RequestBody User user){
+        User queryUser = userRepository.getUserByUserName(user.getUserName());
+        if(null==queryUser){
+            return APIReturn.apiError(401, "No such user!");
+        }
+        if(!queryUser.getPasswordHash().equals(user.getPasswordHash())){
+            return APIReturn.apiError(404, "Wrong password");
+        }
+        Map<String, Object> userIdAndToken = new HashMap<>();
+        String token = TokenUtils.generateToken(queryUser.getUserId());
+        userIdAndToken.put("userId", queryUser.getUserId());
+        userIdAndToken.put("token", token);
+
+        return APIReturn.successfulResult(userIdAndToken);
+    }
     //修改用户信息
     @PostMapping(path = "/user/update")
-    public APIReturn updateUser(@RequestParam(name = "userId")Integer userId,
-                                @RequestParam(name = "userName", required = false)String userName,
-                                @RequestParam(name = "passwordHash", required = false)String passwordHash,
-                                @RequestParam(name = "gender", required = false)Boolean userGender,
-                                @RequestParam(name = "thumbnail", required = false)byte[] userThumbnail,
-                                @RequestParam(name = "birthday", required = false) Date userBirthday,
-                                @RequestParam(name = "location", required = false)String userLocation,
-                                @RequestParam(name = "interests", required = false) List<String> userInterests){
-        User user = userRepository.getUserByUserId(userId);
-        if(null==user){
+    public APIReturn updateUser(@RequestBody User user){
+        User oldUser = userRepository.getUserByUserName(user.getUserName());
+        if(null==oldUser){
             return APIReturn.apiError(400, "Not allowed to update a non-existing user's info.");
         }
-        if(null!=userName){
-            //可能想改的名字已经被使用了
-            User potentialUser=userRepository.getUserByUserName(userName);
-            if(null!=potentialUser&&!userId.equals(potentialUser.getUserId())){
-                return APIReturn.apiError(400, "Name is already used, try another one");
-            }
-            user.setUserName(userName);
+        if (null!=user.getPasswordHash()){
+            oldUser.setPasswordHash(user.getPasswordHash());
         }
-        if(null!=passwordHash){
-            user.setPasswordHash(passwordHash);
+        if (null!=user.getGender()){
+            oldUser.setGender(user.getGender());
         }
-        if(null!=userGender){
-            user.setGender(userGender);
+        if (null!=user.getThumbnail()){
+            oldUser.setThumbnail(user.getThumbnail());
         }
-        if(null!=userThumbnail){
-            user.setThumbnail(userThumbnail);
+        if (null!=user.getBirthday()){
+            oldUser.setBirthday(user.getBirthday());
         }
-        if(null!=userBirthday){
-            user.setBirthday(userBirthday);
+        if (null!=user.getLocation()){
+            oldUser.setLocation(user.getLocation());
         }
-        if(null!=userLocation){
-            user.setLocation(userLocation);
+        if (!user.getInterests().isEmpty()){
+            oldUser.setInterests(user.getInterests());
         }
-        if(null!=userInterests){
-            user.setInterests(userInterests);
-        }
-        userRepository.save(user);
-        return APIReturn.successfulResult(user);
+        userRepository.save(oldUser);
+        return APIReturn.successfulResult(oldUser);
     }
 
     //查询同一爱好的用户列表

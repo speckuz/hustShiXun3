@@ -1,10 +1,10 @@
-package hust.sse.vini.userpart;
+package hust.sse.vini.websocketdemo;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class UserpartApplicationTests {
+class WebsocketdemoApplicationTests {
 
     @Test
     void contextLoads() {

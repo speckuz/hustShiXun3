@@ -1,5 +1,7 @@
 package hust.sse.vini.userpart.user;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
@@ -8,16 +10,20 @@ import java.util.List;
 @Entity
 @Table(name = "users")
 public class User {
-    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
     private Integer userId;
     @Column(length=32,unique = true,nullable = false)
     private String userName;
     @Column(nullable = false)
     private String passwordHash;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Boolean gender;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private byte[] thumbnail;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Date birthday;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String location;
     @ElementCollection
     private List<String> interests = new ArrayList<>();

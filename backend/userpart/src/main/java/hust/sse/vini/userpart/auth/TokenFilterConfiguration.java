@@ -1,4 +1,4 @@
-package hust.sse.vini.userpart.filter;
+package hust.sse.vini.userpart.auth;
 
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;

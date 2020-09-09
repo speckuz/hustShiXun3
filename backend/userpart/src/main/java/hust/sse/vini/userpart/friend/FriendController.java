@@ -1,6 +1,7 @@
 package hust.sse.vini.userpart.friend;
 
-import hust.sse.vini.userpart.user.APIReturn;
+import hust.sse.vini.userpart.APIReturn;
+import hust.sse.vini.userpart.APIReturn;
 import hust.sse.vini.userpart.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

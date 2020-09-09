@@ -1,4 +1,4 @@
-package hust.sse.vini.userpart.user;
+package hust.sse.vini.userpart;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;

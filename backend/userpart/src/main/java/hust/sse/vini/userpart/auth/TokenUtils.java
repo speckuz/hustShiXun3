@@ -1,4 +1,4 @@
-package hust.sse.vini.userpart.token;
+package hust.sse.vini.userpart.auth;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;

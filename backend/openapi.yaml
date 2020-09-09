@@ -1,0 +1,37 @@
+openapi: 3.0.3
+info:
+  title: Vini APIs
+  version: '0.2'
+  description: |-
+    **Vini**的后端API集合。
+    Vini是一个SNS交友平台，提供即时通讯、动态社交和好友管理功能。
+  x-logo:
+    url: ''
+  license:
+    name: MIT License
+    url: 'https://opensource.org/licenses/MIT'
+    x-last-modified: 1599622084114
+  contact: null
+servers:
+  - url: 'https://api.example.io'
+paths: {}
+components:
+  securitySchemes:
+    JWTAuth:
+      type: http
+      scheme: Bearer
+      bearerFormat: JWT
+      description: >-
+        对于绝大多数请求，都将使用[JWT](https://tools.ietf.org/html/rfc7519)进行鉴权，同时提供了用户身份标识的功能。
+
+        Example: 
+
+        > Authorization: Bearer  <Token>
+      x-last-modified: 1599622068609
+  schemas: {}
+  responses: {}
+  parameters: {}
+tags: []
+security:
+  - JWTAuth: []
+externalDocs: null

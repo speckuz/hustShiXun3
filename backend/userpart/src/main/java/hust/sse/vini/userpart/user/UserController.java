@@ -1,5 +1,6 @@
 package hust.sse.vini.userpart.user;
-import hust.sse.vini.userpart.token.TokenUtils;
+import hust.sse.vini.userpart.APIReturn;
+import hust.sse.vini.userpart.auth.TokenUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,7 +24,7 @@ public class UserController {
         return APIReturn.successfulResult(savedUser.getUserId());
     }
 
-    @GetMapping(path = "user/exists")
+    @GetMapping(path = "/user/exists")
     public APIReturn userExists(@RequestParam(name = "userName") String userName){
         //观察查询的结果是否为空
         if (null==userRepository.getUserByUserName(userName)){
@@ -59,10 +60,15 @@ public class UserController {
     }
     //修改用户信息
     @PostMapping(path = "/user/update")
-    public APIReturn updateUser(@RequestBody User user){
+    public APIReturn updateUser(
+            @RequestBody User user,
+            @RequestHeader(name = "Vini-User-Id") Integer myId){
         User oldUser = userRepository.getUserByUserName(user.getUserName());
         if(null==oldUser){
             return APIReturn.apiError(400, "Not allowed to update a non-existing user's info.");
+        }
+        if(!myId.equals(oldUser.getUserId())){
+            return APIReturn.apiError(400,"只能修改自己的用户信息！");
         }
         if (null!=user.getPasswordHash()){
             oldUser.setPasswordHash(user.getPasswordHash());

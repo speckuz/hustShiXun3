@@ -39,6 +39,7 @@ public class UserController {
         if(null==user){
             return APIReturn.apiError(404, "No such user!");
         }
+        user.setPasswordHash(null);
         return APIReturn.successfulResult(user);
     }
 
@@ -58,6 +59,7 @@ public class UserController {
 
         return APIReturn.successfulResult(userIdAndToken);
     }
+
     //修改用户信息
     @PostMapping(path = "/user/update")
     public APIReturn updateUser(

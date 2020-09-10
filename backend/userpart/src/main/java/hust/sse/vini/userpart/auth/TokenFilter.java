@@ -52,7 +52,7 @@ public class TokenFilter extends OncePerRequestFilter {
             }else {
                 response.setStatus(401);
                 PrintWriter writer = response.getWriter();
-                writer.write("{\"errMsg\":\"Not authorized!\"}");
+                writer.write("{\"statusCode\":\"401\",\"errMsg\":\"Not authorized!\"}");
                 writer.close();
             }
         }else {

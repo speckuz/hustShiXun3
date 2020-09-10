@@ -1,4 +1,4 @@
-package Inf;
+package com.example.myapplication.Inf;
 
 public class ChatRecord {
     private String message;

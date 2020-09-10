@@ -21,16 +21,16 @@
             android:resource="@xml/network_security_config" />
 
         <activity android:name=".ModifyData" />
-        <activity android:name=".MyMoment" />
-        <activity android:name=".FriendList" />
+        <activity android:name=".list.MyMoment" />
+        <activity android:name=".list.FriendList" />
         <activity android:name=".FriendInf" />
         <activity android:name=".GroupInf" />
         <activity android:name=".Mine" />
-        <activity android:name=".ChatList" />
+        <activity android:name=".list.ChatList" />
         <activity android:name=".Chat" />
         <activity android:name=".Login" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".splash">
+        <activity android:name=".Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

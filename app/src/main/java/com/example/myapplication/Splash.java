@@ -5,10 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.myapplication.list.ChatList;
+
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class splash extends AppCompatActivity {
+public class Splash extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,7 +23,7 @@ public class splash extends AppCompatActivity {
                 new Thread(){
                     @Override
                     public void run() {
-                        startActivity(new Intent( splash.this,ChatList.class));
+                        startActivity(new Intent( Splash.this, ChatList.class));
                         finish();
                     }
                 }.start();

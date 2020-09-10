@@ -14,6 +14,7 @@
         android:orientation="horizontal">
 
         <ImageButton
+            android:layout_marginLeft="10dp"
             android:id="@+id/backToChatList"
             android:src="@drawable/back"
             android:scaleType="fitCenter"
@@ -25,6 +26,7 @@
 
 
         <TextView
+            android:id="@+id/friendName"
             android:layout_gravity="center"
             android:textSize="30dp"
             android:layout_weight="1"
@@ -45,6 +47,8 @@
     </LinearLayout>
 
     <ListView
+        android:divider="@color/colorAlpha"
+        android:background="@color/ghostwhite"
         android:id="@+id/chatRecord"
         android:layout_width="match_parent"
         android:layout_height="587dp"

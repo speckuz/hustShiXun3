@@ -1,22 +1,22 @@
-package com.example.myapplication;
+package com.example.myapplication.list;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.BaseAdapter;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ImageButton;
-import android.widget.ListView;
 
 import java.util.ArrayList;
 
-import Inf.Friend;
-import Inf.RecentChatList;
-import adapter.FriendListAdapter;
+import com.example.myapplication.Inf.Friend;
+
+import com.example.myapplication.AddFriendOrGroup;
+import com.example.myapplication.Mine;
+import com.example.myapplication.R;
+import com.example.myapplication.adapter.FriendListAdapter;
 
 public class FriendList extends AppCompatActivity {
 
@@ -82,7 +82,8 @@ public class FriendList extends AppCompatActivity {
         profilePicture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent( FriendList.this,Mine.class));
+                startActivity(new Intent( FriendList.this, Mine.class));
+                overridePendingTransition(R.anim.in_from_left, R.anim.out_to_right);
             }
         });
 
@@ -90,14 +91,15 @@ public class FriendList extends AppCompatActivity {
         addFriendOrGroup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent( FriendList.this,AddFriendOrGroup.class));
+                startActivity(new Intent( FriendList.this, AddFriendOrGroup.class));
             }
         });
 
         toChatList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent( FriendList.this,ChatList.class));
+                startActivity(new Intent( FriendList.this, ChatList.class));
+                overridePendingTransition(R.anim.in_from_left, R.anim.out_to_right);
                 finish();
             }
         });
@@ -105,11 +107,12 @@ public class FriendList extends AppCompatActivity {
         toMoment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(FriendList.this,MyMoment.class);
+                Intent intent = new Intent(FriendList.this, MyMoment.class);
                 Bundle bundle=new Bundle();
                 bundle.putString("id", "mine");
                 intent.putExtras(bundle);
                 startActivity(intent);
+                overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
                 finish();
             }
         });

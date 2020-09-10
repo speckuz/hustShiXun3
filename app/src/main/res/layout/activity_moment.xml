@@ -1,43 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     android:layout_width="fill_parent"
+    android:orientation="vertical"
     android:layout_height="wrap_content">
-    <ImageView
-        android:id="@+id/friendHead"
-        android:background="@drawable/sns"
-        android:focusable="false"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_width="65dp"
-        android:layout_height="65dp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/friendHead"
+            android:background="@drawable/sns"
+            android:focusable="false"
+            android:layout_width="65dp"
+            android:layout_height="65dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/userName"
+                android:gravity="center_vertical"
+                android:textColor="@color/blue"
+                android:textSize="20dp"
+                android:text="123"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/friendHead" />
 
-    <TextView
-        android:id="@+id/userName"
-        android:gravity="center_vertical"
-        android:text="123"
-        android:layout_marginLeft="5dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/friendHead" />
+            <TextView
+                android:id="@+id/content"
+                android:textSize="20dp"
+                android:textColor="@color/black"
+                android:text="今天真是开心的一天呢"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
-    <TextView
-        android:id="@+id/content"
-        android:gravity="center_vertical"
-        android:text="h啊哈"
-        android:layout_marginLeft="50dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toEndOf="@+id/userName"
-        android:layout_toRightOf="@id/userName" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/time"
+                    android:textSize="20dp"
+                    android:gravity="center_vertical"
+                    android:text="2020.09.09 12:30"
+                    android:textColor="@color/gray"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content" />
 
-    <TextView
-        android:id="@+id/time"
-        android:gravity="center_vertical"
-        android:text="h啊哈啊"
-        android:layout_marginLeft="50dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toEndOf="@+id/content"
-        android:layout_toRightOf="@id/content" />
-</RelativeLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_height="match_parent">
+                    <ImageButton
+                        android:id="@+id/like"
+                        android:src="@drawable/like0"
+                        android:scaleType="fitCenter"
+                        android:layout_marginRight="20dp"
+                        android:layout_gravity="right"
+                        android:background="@color/colorAlpha"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"/>
+                    <ImageButton
+                        android:id="@+id/comment"
+                        android:src="@drawable/comment"
+                        android:scaleType="fitCenter"
+                        android:layout_gravity="right"
+                        android:layout_marginRight="20dp"
+                        android:background="@color/colorAlpha"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+
+
+
+</LinearLayout>

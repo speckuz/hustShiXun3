@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import Inf.Friend;
+import com.example.myapplication.Inf.Friend;
 
 public class FriendInf extends AppCompatActivity {
 

@@ -1,30 +1,33 @@
-package adapter;
+package com.example.myapplication.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.BaseExpandableListAdapter;
-import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.myapplication.Chat;
+import com.example.myapplication.FriendInf;
 import com.example.myapplication.R;
 
 import java.util.ArrayList;
 
-import Inf.Friend;
-import Inf.RecentChatList;
+import com.example.myapplication.Inf.Friend;
 
 public class FriendListAdapter extends BaseExpandableListAdapter {
     private ArrayList<ArrayList<Friend>> friendLists;
     private ArrayList<String> groupName;
     private LayoutInflater layoutInflater;
-
+    private Context context;
     public FriendListAdapter(ArrayList<ArrayList<Friend>> friendLists, Context context,ArrayList<String> groupName){
         this.friendLists = friendLists;
         this.layoutInflater = LayoutInflater.from(context);
         this.groupName = groupName;
+        this.context = context;
     }
 
 //
@@ -87,13 +90,24 @@ public class FriendListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getChildView(int i, int i1, boolean b, View view, ViewGroup viewGroup) {
-        Friend friendList = friendLists.get(i).get(i1);
+        final Friend friendList = friendLists.get(i).get(i1);
 
         view = layoutInflater.inflate(R.layout.activity_friend,null);
         TextView friendName = (TextView) view.findViewById(R.id.friendName);
         friendName.setText(friendList.getFriendText());
         TextView friendText = (TextView) view.findViewById(R.id.friendText);
         friendText.setText(friendList.getFriendText());
+        LinearLayout clicked = (LinearLayout) view.findViewById(R.id.clicked);
+        clicked.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, FriendInf.class);
+                Bundle bundle=new Bundle();
+                bundle.putString("id", friendList.getId());
+                intent.putExtras(bundle);
+                context.startActivity(intent);
+            }
+        });
 
 //        friendList.friendName = (TextView) view.findViewById(R.id.friendName);
 //        friendList.friendText = (TextView) view.findViewById(R.id.friendText);

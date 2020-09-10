@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.list;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -16,11 +16,17 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.myapplication.AddFriendOrGroup;
+import com.example.myapplication.Chat;
+import com.example.myapplication.Mine;
+import com.example.myapplication.R;
+import com.example.myapplication.SwipeListLayout;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
-import Inf.RecentChatList;
+import com.example.myapplication.Inf.RecentChatList;
 
 public class ChatList extends AppCompatActivity {
 
@@ -61,7 +67,7 @@ public class ChatList extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 RecentChatList recentChatList = recentChatLists.get(i);
-                Intent intent = new Intent(ChatList.this,Chat.class);
+                Intent intent = new Intent(ChatList.this, Chat.class);
                 Bundle bundle=new Bundle();
                 bundle.putString("id", recentChatList.getUserName());
                 intent.putExtras(bundle);
@@ -98,7 +104,7 @@ public class ChatList extends AppCompatActivity {
         addFriendOrGroup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent( ChatList.this,AddFriendOrGroup.class));
+                startActivity(new Intent( ChatList.this, AddFriendOrGroup.class));
             }
         });
 
@@ -107,7 +113,8 @@ public class ChatList extends AppCompatActivity {
         profilePicture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent( ChatList.this,Mine.class));
+                startActivity(new Intent( ChatList.this, Mine.class));
+                overridePendingTransition(R.anim.in_from_left, R.anim.out_to_right);
             }
         });
         //查看好友列表
@@ -115,7 +122,8 @@ public class ChatList extends AppCompatActivity {
         toFriendList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent( ChatList.this,FriendList.class));
+                startActivity(new Intent( ChatList.this, FriendList.class));
+                overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
                 finish();
             }
         });
@@ -125,11 +133,12 @@ public class ChatList extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Intent intent = new Intent(ChatList.this,MyMoment.class);
+                Intent intent = new Intent(ChatList.this, MyMoment.class);
                 Bundle bundle=new Bundle();
                 bundle.putString("id", "mine");
                 intent.putExtras(bundle);
                 startActivity(intent);
+                overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
                 finish();
             }
         });

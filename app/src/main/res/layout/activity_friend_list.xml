@@ -6,19 +6,22 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
 
-    tools:context=".FriendList">
+    tools:context=".list.FriendList">
 
     <LinearLayout
 
         android:layout_width="match_parent"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <ImageButton
 
             android:id="@+id/profilePicture"
             android:src="@drawable/head"
-            android:layout_width="60dp"
-            android:layout_height="60dp"/>
+            android:layout_width="50dp"
+            android:layout_height="50dp"/>
 
 
         <TextView
@@ -35,8 +38,8 @@
             android:src="@drawable/add_friend_or_group"
             android:scaleType="fitCenter"
             android:background="@color/colorAlpha"
-            android:layout_width="60dp"
-            android:layout_height="60dp"/>
+            android:layout_width="50dp"
+            android:layout_height="50dp"/>
 
     </LinearLayout>
 

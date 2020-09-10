@@ -2,21 +2,21 @@ package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 
-import Inf.ChatRecord;
-import Inf.Friend;
-import adapter.ChatAdapter;
+import com.example.myapplication.Inf.ChatRecord;
+
+import com.example.myapplication.adapter.ChatAdapter;
+import com.example.myapplication.list.ChatList;
+
 import webService.OkHttp;
 
 public class Chat extends AppCompatActivity {
@@ -63,7 +63,7 @@ public class Chat extends AppCompatActivity {
         backToChatList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent( Chat.this,ChatList.class));
+                startActivity(new Intent( Chat.this, ChatList.class));
                 finish();
             }
         });
@@ -106,7 +106,7 @@ public class Chat extends AppCompatActivity {
             @Override
             public void run() {
                 super.run();
-                new OkHttp().test(message);
+                new OkHttp().searchFriend(message);
             }
         }.start();
 

@@ -6,10 +6,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
 
-    tools:context=".ChatList">
+    tools:context=".list.ChatList">
 
     <LinearLayout
-
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -17,30 +19,31 @@
 
             android:id="@+id/profilePicture"
             android:src="@drawable/head"
-            android:layout_width="60dp"
-            android:layout_height="60dp"/>
+            android:layout_width="50dp"
+            android:layout_height="50dp"/>
 
 
         <TextView
             android:layout_gravity="center"
-            android:textSize="30dp"
+            android:textSize="25dp"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="recentChat"
-            android:textColor="#000" />
+            android:textColor="@color/black" />
         <ImageButton
             android:id="@+id/addFriendOrGroup"
             android:src="@drawable/add_friend_or_group"
             android:scaleType="fitCenter"
             android:background="@color/colorAlpha"
-            android:layout_width="60dp"
-            android:layout_height="60dp"/>
+            android:layout_width="50dp"
+            android:layout_height="50dp"/>
 
     </LinearLayout>
 
     <ListView
+        android:background="@color/colorAlpha"
         android:id="@+id/chatList"
         android:layout_weight="1"
         android:layout_width="match_parent"

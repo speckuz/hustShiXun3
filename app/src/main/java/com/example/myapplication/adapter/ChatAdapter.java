@@ -1,4 +1,4 @@
-package adapter;
+package com.example.myapplication.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import Inf.ChatRecord;
+import com.example.myapplication.Inf.ChatRecord;
 import com.example.myapplication.R;
 
 import java.util.ArrayList;

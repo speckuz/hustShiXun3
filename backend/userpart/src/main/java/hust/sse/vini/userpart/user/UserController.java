@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@CrossOrigin(origins = "*")
 @RestController
 public class UserController {
     @Autowired
@@ -16,7 +17,7 @@ public class UserController {
     @PostMapping(path = "/user/create")
     public APIReturn createUser(@RequestBody User user){
         //先查询用户在不在
-        if (null!=userRepository.getUserByUserName(user.getUserName())){
+        if (null!=userRepository.findByUserName(user.getUserName())){
             return APIReturn.apiError(400, "Users already exists!");
         }
         //创建用户
@@ -27,7 +28,7 @@ public class UserController {
     @GetMapping(path = "/user/exists")
     public APIReturn userExists(@RequestParam(name = "userName") String userName){
         //观察查询的结果是否为空
-        if (null==userRepository.getUserByUserName(userName)){
+        if (null==userRepository.findByUserName(userName)){
             return APIReturn.successfulResult(false);
         }
         return APIReturn.successfulResult(true);
@@ -35,7 +36,7 @@ public class UserController {
 
     @GetMapping(path="/user/getUserByUserName")
     public APIReturn getUserIdByUserName(@RequestParam(name = "userName")String userName){
-        User user = userRepository.getUserByUserName(userName);
+        User user = userRepository.findByUserName(userName);
         if(null==user){
             return APIReturn.apiError(404, "No such user!");
         }
@@ -45,7 +46,7 @@ public class UserController {
 
     @PostMapping(path = "/login")
     public APIReturn userLogin(@RequestBody User user){
-        User queryUser = userRepository.getUserByUserName(user.getUserName());
+        User queryUser = userRepository.findByUserName(user.getUserName());
         if(null==queryUser){
             return APIReturn.apiError(401, "No such user!");
         }
@@ -65,7 +66,7 @@ public class UserController {
     public APIReturn updateUser(
             @RequestBody User user,
             @RequestHeader(name = "Vini-User-Id") Integer myId){
-        User oldUser = userRepository.getUserByUserName(user.getUserName());
+        User oldUser = userRepository.findByUserName(user.getUserName());
         if(null==oldUser){
             return APIReturn.apiError(400, "Not allowed to update a non-existing user's info.");
         }
@@ -102,5 +103,10 @@ public class UserController {
             return APIReturn.apiError(400, "No users like this.");
         }
         return APIReturn.successfulResult(userList);
+    }
+
+    @GetMapping("/user/interestOptions")
+    public APIReturn getInterestOptions(){
+        return APIReturn.successfulResult(UserInterestOptions.getAllInterests());
     }
 }

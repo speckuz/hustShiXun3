@@ -1,11 +1,14 @@
 package hust.sse.vini.userpart.friend;
 
+import org.hibernate.annotations.GeneratorType;
+
 import javax.persistence.*;
 
 @Entity
 public class FriendRelation {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "friend_relation_generator")
+    @SequenceGenerator(name = "friend_relation_generator",sequenceName = "friend_relation_seq")
     private Integer friendRelationId;
 
     @Column(nullable = false)

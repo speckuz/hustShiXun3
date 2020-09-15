@@ -19,7 +19,7 @@ public class FriendController {
     @GetMapping(path = "/friend/getAll")
     public APIReturn findMyFriend(@RequestHeader(name = "Vini-User-Id") Integer userId){
         List<PersonalFriend> friends=new ArrayList<PersonalFriend>();
-        List<FriendRelation> friendRelations=friendRepository.getAllByUserUserId(userId);
+        List<FriendRelation> friendRelations=friendRepository.findAllByUserUserId(userId);
         for (FriendRelation relation:friendRelations) {
             if(!relation.getPendingConfirm()){
                 friends.add(new PersonalFriend(
@@ -35,7 +35,10 @@ public class FriendController {
     public APIReturn addFriend(
             @RequestHeader(name = "Vini-User-Id") Integer myId,
             @RequestBody PersonalFriend personalFriend){
-        if(null==userRepository.getUserByUserId(personalFriend.getUserId())){
+        if(myId.equals(personalFriend.getUserId())){
+            return APIReturn.apiError(400,"不能添加自己为好友！");
+        }
+        if(null==userRepository.findByUserId(personalFriend.getUserId())){
             return APIReturn.apiError(404,"没有该用户！");
         }
         if(null!=friendRepository.findByUserUserIdAndFriendUserId(myId, personalFriend.getUserId())){

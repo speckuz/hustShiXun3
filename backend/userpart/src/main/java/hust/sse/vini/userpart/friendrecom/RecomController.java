@@ -1,6 +1,7 @@
 package hust.sse.vini.userpart.friendrecom;
 
 import hust.sse.vini.userpart.APIReturn;
+import hust.sse.vini.userpart.user.User;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,7 +16,7 @@ public class RecomController {
         if(MLRecommendator.mlRecommendator.classifier==null){
             return APIReturn.successfulResult(RandomRecommendator.randomRecommendator.randomRecommendate(userId));
         }
-        List<Integer> userIds=MLRecommendator.mlRecommendator.mlRecommendate(userId);
+        List<User> userIds=MLRecommendator.mlRecommendator.mlRecommendate(userId);
         if(userIds==null||userIds.size()==0){
             return APIReturn.successfulResult(RandomRecommendator.randomRecommendator.randomRecommendate(userId));
         }

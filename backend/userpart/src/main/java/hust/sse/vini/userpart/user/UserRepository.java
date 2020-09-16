@@ -12,4 +12,5 @@ public interface UserRepository extends CrudRepository <User, Integer> {
     User findByUserId(Integer userId);
     List<User> getUserByUserIdIn(Collection<Integer> userIds);
     User findTopByOrderByUserIdDesc();
+    List<User> findByNicknameLike(String nickname);
 }

@@ -16,17 +16,24 @@ public class User {
     private Integer userId;
     @Column(length=32,unique = true,nullable = false)
     private String userName;
+
+    private String nickname;
     @Column(nullable = false)
     private String passwordHash;
+
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private Boolean gender;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
+
     @Lob
+    @Basic(fetch = FetchType.LAZY)
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private byte[] thumbnail;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private Date birthday;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private String location;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private String signature;
     @ElementCollection
     private List<String> interests = new ArrayList<>();
 
@@ -92,5 +99,21 @@ public class User {
 
     public void setInterests(List<String> interests) {
         this.interests = interests;
+    }
+
+    public String getSignature() {
+        return signature;
+    }
+
+    public void setSignature(String signature) {
+        this.signature = signature;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 }

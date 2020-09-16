@@ -89,12 +89,12 @@ public class MLRecommendator {
         this.classifier.buildClassifier(ds);
     }
 
-    public List<Integer> mlRecommendate(Integer userId){
+    public List<User> mlRecommendate(Integer userId){
         return mlRecommendate(userId,3);
     }
 
-    public List<Integer> mlRecommendate(Integer userId,int recommendateNum){
-        ArrayList<Integer> result=new ArrayList<>();
+    public List<User> mlRecommendate(Integer userId,int recommendateNum){
+        ArrayList<User> result=new ArrayList<>();
         int i=5*recommendateNum;
         int maxUserId=userRepository.findTopByOrderByUserIdDesc().getUserId();
         User user= userRepository.findByUserId(userId);
@@ -113,7 +113,7 @@ public class MLRecommendator {
             DenseInstance ins=new DenseInstance(DataProcessing.attributeMinus(attr1,attr2));
             Object classifyRes=classifier.classify(ins);
             if(classifyRes!=null && classifyRes.equals(1)){
-                result.add(friendUserId);
+                result.add(friend);
             }
         }
         return result;

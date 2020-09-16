@@ -28,11 +28,11 @@ public class RandomRecommendator {
         randomRecommendator.userRepository=this.userRepository;
     }
 
-    public List<Integer> randomRecommendate(Integer userId){
+    public List<User> randomRecommendate(Integer userId){
         return randomRecommendate(userId,3);
     }
 
-    public List<Integer> randomRecommendate(Integer userId,int recommendNum){
+    public List<User> randomRecommendate(Integer userId,int recommendNum){
         ArrayList<Integer> result=new ArrayList<>();
         ArrayList<Integer> alreadyFriend=new ArrayList<>();
         List<FriendRelation> fr=friendRepository.findAllByUserUserId(userId);
@@ -50,12 +50,12 @@ public class RandomRecommendator {
                         return;
             });
             if(result.size()<=recommendNum){
-                return result;
+                return userRepository.getUserByUserIdIn(result);
             }else{
                 Random rnd=new Random();
                 while (result.size()>recommendNum){
                     result.remove(rnd.nextInt(result.size()));
-                    return result;
+                    return userRepository.getUserByUserIdIn(result);
                 }
             }
         }
@@ -68,7 +68,7 @@ public class RandomRecommendator {
             }
         }
         result.addAll(resSet);
-        return result;
+        return userRepository.getUserByUserIdIn(result);
     }
 
 }

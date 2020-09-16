@@ -21,6 +21,9 @@ public class UserController {
             return APIReturn.apiError(400, "Users already exists!");
         }
         //创建用户
+        if(null==user.getNickname()){
+            user.setNickname(user.getUserName());
+        }
         User savedUser = userRepository.save(user);
         return APIReturn.successfulResult(savedUser.getUserId());
     }
@@ -91,6 +94,12 @@ public class UserController {
         if (!user.getInterests().isEmpty()){
             oldUser.setInterests(user.getInterests());
         }
+        if(null!=user.getSignature()){
+            oldUser.setSignature(user.getSignature());
+        }
+        if(null!=user.getNickname()){
+            oldUser.setNickname(user.getNickname());
+        }
         userRepository.save(oldUser);
         return APIReturn.successfulResult(oldUser);
     }
@@ -108,5 +117,10 @@ public class UserController {
     @GetMapping("/user/interestOptions")
     public APIReturn getInterestOptions(){
         return APIReturn.successfulResult(UserInterestOptions.getAllInterests());
+    }
+
+    @GetMapping("/user/searchByNickname")
+    public APIReturn getSimilarUser(@RequestParam(name = "nickname") String nickname){
+        return APIReturn.successfulResult(userRepository.findByNicknameLike(nickname));
     }
 }

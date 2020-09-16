@@ -1,7 +1,6 @@
 package hust.sse.vini.userpart.friendrecom;
 
 import hust.sse.vini.userpart.user.UserInterestOptions;
-import net.sf.javaml.core.SparseInstance;
 
 import java.util.Arrays;
 import java.util.List;

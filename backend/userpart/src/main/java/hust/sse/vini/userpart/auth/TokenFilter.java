@@ -23,7 +23,7 @@ public class TokenFilter extends OncePerRequestFilter {
 
     private final static String tokenSavedHeader = "Authorization";
 
-    String[] excludedPaths={"/login","/user/create","/user/exists","/user/interestOptions"};
+    String[] excludedPaths={"/login","/user/create","/user/exists","/user/interestOptions", "/link"};
     boolean excludeFlag;
 
 
@@ -45,8 +45,7 @@ public class TokenFilter extends OncePerRequestFilter {
             if(null!=token&&verifyToken(token)){
                 token=token.replaceFirst("Bearer ", "");
                 String userIdStr = JWT.decode(token).getAudience().get(0);
-                HttpServletRequest newreq=(HttpServletRequest) request;
-                HeaderHttpServletRequestWrapper requestWrapper=new HeaderHttpServletRequestWrapper(newreq);
+                HeaderHttpServletRequestWrapper requestWrapper=new HeaderHttpServletRequestWrapper(request);
                 requestWrapper.addHeader("Vini-User-Id",userIdStr);
                 filterChain.doFilter(requestWrapper, response);
             }else {
@@ -85,8 +84,8 @@ class HeaderHttpServletRequestWrapper extends HttpServletRequestWrapper{
      * @param request The request to wrap
      * @throws IllegalArgumentException if the request is null
      */
-    private HashMap<String,String> modifiedHeaders=new HashMap<>();
-    private ArrayList<String> headerNames=new ArrayList<>();
+    private final HashMap<String,String> modifiedHeaders=new HashMap<>();
+    private final ArrayList<String> headerNames=new ArrayList<>();
 
     public HeaderHttpServletRequestWrapper(HttpServletRequest request) {
         super(request);

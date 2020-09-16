@@ -16,16 +16,12 @@ public class User {
     private Integer userId;
     @Column(length=32,unique = true,nullable = false)
     private String userName;
-
     @Column(nullable = false)
     private String passwordHash;
-
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private Boolean gender;
-
-    @Lob
-    @Basic(fetch = FetchType.LAZY)
     @JsonInclude(JsonInclude.Include.NON_NULL)
+    @Lob
     private byte[] thumbnail;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private Date birthday;

@@ -23,7 +23,8 @@ public class TokenFilter extends OncePerRequestFilter {
 
     private final static String tokenSavedHeader = "Authorization";
 
-    String[] excludedPaths={"/login","/user/create","/user/exists","/user/interestOptions", "/link"};
+    String[] excludedPaths={"/login","/user/create","/user/exists","/user/interestOptions", "/link",
+            "/group/create", "/group/search", "/group/add", "/group/permission", "/group/refuse", "/group/delete", "/group/escape", "/group/remove"};
     boolean excludeFlag;
 
 

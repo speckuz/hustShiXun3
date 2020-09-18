@@ -8,7 +8,7 @@ import javax.persistence.*;
 public class FriendRelation {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "friend_relation_generator")
-    @SequenceGenerator(name = "friend_relation_generator",sequenceName = "friend_relation_seq")
+    @SequenceGenerator(name = "friend_relation_generator",initialValue = 1, allocationSize = 1,sequenceName = "friend_relation_seq")
     private Integer friendRelationId;
 
     @Column(nullable = false)

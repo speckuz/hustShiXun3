@@ -10,7 +10,7 @@ import java.util.List;
 public class Group {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "group_generator")
-    @SequenceGenerator(name = "group_generator",sequenceName = "group_seq")
+    @SequenceGenerator(name = "group_generator",initialValue = 1,allocationSize = 1,sequenceName = "group_seq")
     private Integer id;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @Column(nullable = false)

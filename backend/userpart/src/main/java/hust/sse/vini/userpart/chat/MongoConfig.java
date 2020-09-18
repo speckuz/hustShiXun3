@@ -9,7 +9,7 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 @Configuration
 public class MongoConfig {
     public @Bean MongoClient mongoClient() {
-        return MongoClients.create("mongodb://192.168.137.130:27017");
+        return MongoClients.create("mongodb://vini_backend_user:v1n1_back3nd_us3r@218.244.151.221:27017");
     }
 
     public @Bean

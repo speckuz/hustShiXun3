@@ -12,7 +12,7 @@ import java.util.List;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "user_generator")
-    @SequenceGenerator(name = "user_generator",sequenceName = "user_seq")
+    @SequenceGenerator(name="user_generator",allocationSize=1,initialValue=1, sequenceName="user_seq")
     private Integer userId;
     @Column(length=32,unique = true,nullable = false)
     private String userName;
@@ -34,7 +34,7 @@ public class User {
     private String location;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private String signature;
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     private List<String> interests = new ArrayList<>();
 
     public Integer getUserId() {

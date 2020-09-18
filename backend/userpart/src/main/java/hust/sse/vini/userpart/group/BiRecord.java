@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class BiRecord {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "group_relation_generator")
-    @SequenceGenerator(name = "group_relation_generator",sequenceName = "group_relation_seq")
+    @SequenceGenerator(name = "group_relation_generator",allocationSize = 1, initialValue = 1,sequenceName = "group_relation_seq")
     private Integer id;
     @Column(nullable = false)
     private Integer memberId;

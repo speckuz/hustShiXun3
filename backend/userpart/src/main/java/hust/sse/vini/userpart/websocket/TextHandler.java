@@ -10,6 +10,8 @@ import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
+
+import java.util.Date;
 import java.util.List;
 
 
@@ -26,7 +28,7 @@ public class TextHandler extends TextWebSocketHandler {
         System.out.println(linkId+"接入连接池，寻找可能的残留信息");
         List<PendingMsg> tempMsgIds = pendingMsgRepo.getPendingMsgsByTargetId(linkId);
         for(PendingMsg msg:tempMsgIds){
-            session.sendMessage(new TextMessage(targetMsgRepo.getByMsgId(msg.getMsgIndex()).getMsgPayload()));
+            session.sendMessage(new TextMessage(targetMsgRepo.getByMsgId(msg.getMsgIndex()).toString()));
             System.out.println("收到消息"+targetMsgRepo.getByMsgId(msg.getMsgIndex()).getMsgPayload());
             targetMsgRepo.deleteByMsgId(msg.getMsgIndex());
         }
@@ -42,11 +44,15 @@ public class TextHandler extends TextWebSocketHandler {
         Integer targetId = (Integer) session.getAttributes().get("targetId");
         if(SessionMap.contains(targetId)){
             WebSocketSession targetSession = SessionMap.querySession(targetId);
-            targetSession.sendMessage(message);
+            TargetMsg targetMsg = new TargetMsg(message.getPayload(), "text", new Date(), (Integer) session.getAttributes().get("linkId"),targetId);
+            targetSession.sendMessage(new TextMessage(targetMsg.toString()));
         }else {
             int oldCount = (int) targetMsgRepo.count();
-            Integer msgId = targetMsgRepo.save(new TargetMsg(oldCount + 1, message.getPayload())).getMsgId();
-            //把接收人的id和msgId存到msgIdListMap中
+            //计算时间
+            TargetMsg targetMsg= new TargetMsg(message.getPayload(), "text", new Date(), (Integer) session.getAttributes().get("linkId"),targetId);
+            targetMsg.setMsgId(oldCount+1);
+            Integer msgId = targetMsgRepo.save(targetMsg).getMsgId();
+            //把msg存到待接收队列中
             pendingMsgRepo.save(new PendingMsg(targetId, msgId));
             System.out.println(msgId + "号消息发送给" + targetId + "号用户");
         }

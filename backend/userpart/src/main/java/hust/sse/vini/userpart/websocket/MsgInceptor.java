@@ -28,5 +28,6 @@ public class MsgInceptor implements HandshakeInterceptor {
     @Override
     public void afterHandshake(ServerHttpRequest serverHttpRequest, ServerHttpResponse serverHttpResponse, WebSocketHandler webSocketHandler, Exception e) {
         System.out.println("握手结束");
+        //System.out.println(serverHttpRequest.getHeaders().get("Vini-User-Id").get(0));
     }
 }

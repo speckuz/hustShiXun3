@@ -2,10 +2,7 @@ package hust.sse.vini.userpart.friendrecom;
 
 import hust.sse.vini.userpart.user.UserInterestOptions;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 public class DataProcessing {
     public static double[] interestsToOneHot(Iterable<String> interests){

@@ -1,7 +1,7 @@
 package hust.sse.vini.userpart.websocket;
 
 import com.alibaba.fastjson.JSON;
-import hust.sse.vini.userpart.chat.*;
+import hust.sse.vini.userpart.communication.*;
 import hust.sse.vini.userpart.group.Group;
 import hust.sse.vini.userpart.group.GroupRepository;
 import hust.sse.vini.userpart.user.User;
@@ -16,7 +16,6 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 
 @Component
@@ -30,8 +29,8 @@ public class TextHandler extends TextWebSocketHandler {
     @Autowired
     private UserRepository userRepo;
 
-    private HashSet<String> srcSet = new HashSet<>();
-    private HashSet<String> typeSet = new HashSet<>();
+    private final HashSet<String> srcSet = new HashSet<>();
+    private final HashSet<String> typeSet = new HashSet<>();
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 

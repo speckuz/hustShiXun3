@@ -1,4 +1,4 @@
-package hust.sse.vini.userpart.chat;
+package hust.sse.vini.userpart.communication;
 
 import java.util.Date;
 

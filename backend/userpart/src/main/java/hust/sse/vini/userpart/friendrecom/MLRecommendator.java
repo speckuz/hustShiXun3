@@ -9,7 +9,6 @@ import net.sf.javaml.classification.KDtreeKNN;
 import net.sf.javaml.core.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Controller;
 
 import javax.annotation.PostConstruct;
 import java.util.*;

@@ -1,6 +1,4 @@
-package hust.sse.vini.userpart.chat;
-
-import java.util.Date;
+package hust.sse.vini.userpart.communication;
 
 public class ReceiveMsgJson {
     //消息主体

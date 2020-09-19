@@ -10,14 +10,16 @@ import java.util.List;
 public class Group {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "group_generator")
-    @SequenceGenerator(name = "group_generator",initialValue = 1,allocationSize = 1,sequenceName = "group_seq")
+    @SequenceGenerator(name = "group_generator", allocationSize = 1,sequenceName = "group_seq")
     private Integer id;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @Column(nullable = false)
     private String viniGroupName;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private Integer founderId;
-    @ElementCollection
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private byte[] groupThumbNail;
+    @ElementCollection(fetch = FetchType.EAGER)
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<Integer> members;
 
@@ -43,6 +45,14 @@ public class Group {
 
     public void setFounderId(Integer founderId) {
         this.founderId = founderId;
+    }
+
+    public byte[] getGroupThumbNail() {
+        return groupThumbNail;
+    }
+
+    public void setGroupThumbNail(byte[] groupThumbNail) {
+        this.groupThumbNail = groupThumbNail;
     }
 
     public List<Integer> getMembers() {

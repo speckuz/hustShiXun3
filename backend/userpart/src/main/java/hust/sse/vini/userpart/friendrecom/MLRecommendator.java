@@ -37,6 +37,10 @@ public class MLRecommendator {
 
     public void trainModel(){
         FriendRelation maxfr=friendRepository.findTopByOrderByFriendRelationIdDesc();
+        if(null==maxfr){
+            this.classifier=null;
+            return;
+        }
         Integer maxFrId=maxfr.getFriendRelationId();
         User maxUser= userRepository.findTopByOrderByUserIdDesc();
         Integer maxUserId=maxUser.getUserId();

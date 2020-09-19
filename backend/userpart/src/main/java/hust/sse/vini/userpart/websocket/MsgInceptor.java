@@ -1,6 +1,8 @@
 package hust.sse.vini.userpart.websocket;
 
 import cn.hutool.http.HttpUtil;
+import hust.sse.vini.userpart.user.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.stereotype.Component;
@@ -12,6 +14,8 @@ import java.util.Map;
 
 @Component
 public class MsgInceptor implements HandshakeInterceptor {
+    @Autowired
+    private UserRepository userRepo;
 
     @Override
     public boolean beforeHandshake(ServerHttpRequest serverHttpRequest, ServerHttpResponse serverHttpResponse, WebSocketHandler webSocketHandler, Map<String, Object> map) throws Exception {
@@ -19,9 +23,10 @@ public class MsgInceptor implements HandshakeInterceptor {
         System.out.println("握手开始");
         HashMap<String, String> paramMap = HttpUtil.decodeParamMap(serverHttpRequest.getURI().getQuery(), "utf-8");
         Integer linkId = Integer.parseInt(paramMap.get("linkId"));
-        Integer targetId = Integer.parseInt(paramMap.get("targetId"));
+        if(null==userRepo.findByUserId(linkId)){
+            return false;
+        }
         map.put("linkId" , linkId);
-        map.put("targetId", targetId);
         return true;
     }
 

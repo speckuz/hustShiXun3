@@ -34,7 +34,10 @@ public class GroupController {
         group.setMembers(new ArrayList<>());
         group.getMembers().add(founderId);
         Group savedGroup = groupRepo.save(group);
-        biRepo.save(new BiRecord(founderId, group.getId(), true));
+        BiRecord biRecord = new BiRecord(founderId, group.getId(), true);
+        biRecord.setMemberAlias(userRepo.findByUserId(founderId).getNickname());
+        biRecord.setGroupAlias(savedGroup.getViniGroupName());
+        biRepo.save(biRecord);
         return APIReturn.successfulResult(savedGroup);
     }
 

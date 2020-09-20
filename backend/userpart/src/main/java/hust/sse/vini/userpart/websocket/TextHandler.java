@@ -1,6 +1,7 @@
 package hust.sse.vini.userpart.websocket;
 
 import com.alibaba.fastjson.JSON;
+import hust.sse.vini.userpart.APIReturn;
 import hust.sse.vini.userpart.communication.*;
 import hust.sse.vini.userpart.group.Group;
 import hust.sse.vini.userpart.group.GroupRepository;
@@ -71,21 +72,21 @@ public class TextHandler extends TextWebSocketHandler {
         Integer targetId = receiveMsgJson.getReceiveId();
         //处理不合法逻辑
         if((!typeSet.contains(msgType))||(!srcSet.contains(msgSource))){
-            session.sendMessage(new TextMessage("wrong msg source or type"));
+            session.sendMessage(new TextMessage(JSON.toJSONString(APIReturn.apiError(400, "wrong msg source or type"))));
             return;
         }
         if(!msgSource.equals("scenery")&&((null!=receiveMsgJson.getCommentId())||(null!=receiveMsgJson.getSceneryId()))){
-            session.sendMessage(new TextMessage("forbidding commentId or sceneryId"));
+            session.sendMessage(new TextMessage(JSON.toJSONString(APIReturn.apiError(400, "forbidding commentId or sceneryId"))));
             return;
         }
         if(msgSource.equals("scenery")&&(null==receiveMsgJson.getCommentId())&&(null==receiveMsgJson.getSceneryId())){
-            session.sendMessage(new TextMessage("commentId and sceneryId missing."));
+            session.sendMessage(new TextMessage(JSON.toJSONString(APIReturn.apiError(400, "commentId and sceneryId missing."))));
             return;
         }
         if("group".equals(msgSource)){
             Group group = groupRepo.getById(targetId);
             if(null==group){
-                session.sendMessage(new TextMessage("Invalid groupId"));
+                session.sendMessage(new TextMessage(JSON.toJSONString(APIReturn.apiError(400, "Invalid groupId"))));
                 return;
             }
             List<Integer> targetIds = group.getMembers();
@@ -110,11 +111,12 @@ public class TextHandler extends TextWebSocketHandler {
                     System.out.println(msgId + "号消息未发送给" + memberId + "号用户");
                 }
             }
+            session.sendMessage(new TextMessage(JSON.toJSONString(APIReturn.successfulResult(null))));
         }else{
             //获取到文本信息存储到SavedMsg(String id;Integer msgId;TextMessage msg;)的数据Collection中:
             User user = userRepo.findByUserId(targetId);
             if(null==user){
-                session.sendMessage(new TextMessage("Invalid receiveUserId."));
+                session.sendMessage(new TextMessage(JSON.toJSONString(APIReturn.apiError(400, "Invalid receiveUserId."))));
                 return;
             }
             if(SessionMap.contains(targetId)){
@@ -133,6 +135,7 @@ public class TextHandler extends TextWebSocketHandler {
                 pendingMsgRepo.save(new PendingMsg(targetId, msgId));
                 System.out.println(msgId + "号消息发送给" + targetId + "号用户");
             }
+            session.sendMessage(new TextMessage(JSON.toJSONString(APIReturn.successfulResult(null))));
         }
 
     }

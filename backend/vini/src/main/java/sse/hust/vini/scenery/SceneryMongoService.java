@@ -66,14 +66,19 @@ public class SceneryMongoService {
         comment.setCommentIndex(post.getNextCommentIndex());
         comment.setCommentUserId(userId);
         mongoTemplate.updateFirst(sceneryQuery,(new Update()).push("comments",comment).inc("nextCommentIndex",1),SceneryPost.class);
-        Integer[] userIds=new Integer[2];
-        userIds[0]=post.getUserId();
-        for (SceneryComment sc:post.getComments()){
-            if(sc.getCommentIndex()==comment.getCommentToIndex()){
-                userIds[1]=sc.getCommentUserId();
-                break;
+        Integer[] userIds;
+        if(comment.getCommentToIndex().equals(0)){
+            userIds=new Integer[1];
+        }else{
+            userIds=new Integer[2];
+            for (SceneryComment sc:post.getComments()){
+                if(sc.getCommentIndex()==comment.getCommentToIndex()){
+                    userIds[1]=sc.getCommentUserId();
+                    break;
+                }
             }
         }
+        userIds[0]=post.getUserId();
         for(Integer targetUserId:userIds){
             if(SessionMap.contains(targetUserId)){
                 PushMsgJson msgJson=new PushMsgJson(comment.getCommentText(),0,new Date(),

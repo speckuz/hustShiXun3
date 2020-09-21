@@ -1,5 +1,6 @@
 package hust.sse.vini.userpart.group;
 
+import com.alibaba.fastjson.JSONObject;
 import hust.sse.vini.userpart.APIReturn;
 import hust.sse.vini.userpart.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,9 +54,8 @@ public class GroupController {
         if (null == tempGroup) {
             return APIReturn.apiError(400, "No Such Group.");
         }
-        List<Object> res = new ArrayList<>();
+        JSONObject res = JSONObject.parseObject(tempGroup.toString());
         String identity;
-        res.add(tempGroup);
         if(null!=biRepo.getByGroupIdAndMemberId(groupId, userId)&&biRepo.getByGroupIdAndMemberId(groupId, userId).isConfirmed()){
             if(userId.equals(tempGroup.getFounderId())){
                 identity="FOUNDER";
@@ -65,7 +65,7 @@ public class GroupController {
         }else{
             identity="UNKNOWN";
         }
-        res.add(identity);
+        res.put("identity", identity);
         return APIReturn.successfulResult(res);
     }
 
@@ -116,7 +116,7 @@ public class GroupController {
         }
         request.setConfirmed(true);
         request.setGroupAlias(group.getViniGroupName());
-        request.setMemberAlias(userRepo.findByUserId(userId).getNickname());
+        request.setMemberAlias(userRepo.findByUserId(requestId).getNickname());
         group.getMembers().add(requestId);
         biRepo.save(request);
         return APIReturn.successfulResult(null);

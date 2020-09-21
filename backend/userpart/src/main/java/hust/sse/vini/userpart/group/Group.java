@@ -23,6 +23,12 @@ public class Group {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<Integer> members;
 
+    @Override
+    public String toString() {
+        String str = "{\"id\": "+this.id+",\"viniGroupName\": \""+this.getViniGroupName()+"\",\"founderId\":"+this.getFounderId()+",\"members\": "+this.getMembers().toString()+"}";
+        return str;
+    }
+
     public Integer getId() {
         return id;
     }

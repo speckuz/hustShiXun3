@@ -86,6 +86,14 @@
             <artifactId>fastjson</artifactId>
             <version>1.2.73</version>
         </dependency>
+        <dependency>
+            <groupId>net.sf</groupId>
+            <artifactId>java-ml</artifactId>
+            <version>0.1.7</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/javaml-0.1.7.jar</systemPath>
+        </dependency>
+
 
     </dependencies>
 

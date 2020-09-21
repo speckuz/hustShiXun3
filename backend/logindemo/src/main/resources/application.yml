@@ -1,0 +1,14 @@
+spring:
+  #MySQL datasource
+  datasource:
+    url: jdbc:mysql://192.168.137.128:3306/vini
+    username: root
+    password: vini_sns
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+  #Redis datasource
+  redis:
+    host: 192.168.137.128
+

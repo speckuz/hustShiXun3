@@ -1,0 +1,98 @@
+openapi: 3.0.3
+info:
+  title: Vini APIs
+  version: '0.2'
+  description: |-
+    **Vini**的后端API集合。
+    Vini是一个SNS交友平台，提供即时通讯、动态社交和好友管理功能。
+  contact:
+    name: LTW
+    email: ltwsamuel@outlook.com
+  license:
+    name: MIT License
+    url: 'https://opensource.org/licenses/MIT'
+    x-last-modified: 1599622084114
+  x-logo:
+    url: ''
+servers:
+  - url: 'http://vini-host:8080/'
+    description: Vini的服务器目前采用一台服务器，在8080端口上提供服务。
+    x-last-modified: 1599634787158
+paths:
+  /login:
+    summary: 登录Vini系统
+    description: Vini系统采用JWT鉴权，通过登录接口，可以通过用户名和密码换取一段时间内有效的JWT。
+    post:
+      tags: []
+      operationId: v-a-001
+      summary: ''
+      description: 通过POST Body向该路径发送包含登录信息的json数据包，从而换取登录凭证。
+      requestBody:
+        $ref: '#/components/schemas/User'
+      responses:
+        '200':
+          type: ''
+          description: ''
+          $ref: '#/components/schemas/BasicAPIReturn'
+          x-last-modified: 1599641423150
+    x-last-modified: 1599635059340
+components:
+  schemas:
+    BasicAPIReturn:
+      description: 对于所有的API，都以该种返回值作为基类型，根据statusCode和API语义，会附加其他的数据。
+      required:
+        - statusCode
+      enum: []
+      type: object
+      properties:
+        statusCode:
+          format: int32
+          description: API请求的状态码，类似于HTTP状态码，使用200表示请求成功，使用大于等于400的值表示请求失败。
+          type: integer
+      example:
+        statusCode: 200
+      x-last-modified: 1599638930631
+    APIError:
+      description: 当API请求失败时，基于标准API返回值，其statusCode会被设置。同时，将始终附带一个errMsg，用于标识错误出现的原因。
+      required:
+        - statusCode
+        - errMsg
+      enum: []
+      type: object
+      properties:
+        allOf:
+          '0':
+            $ref: '#/components/schemas/BasicAPIReturn'
+          '1':
+            errMsg:
+              type: string
+              description: API请求发生错误的原因。
+      example:
+        statusCode: 404
+        errMsg: 找不到该用户！
+      x-last-modified: 1599638966870
+    User:
+      description: 用户结构体，用于用户信息的更新、获取和增加
+      required: []
+      enum: []
+      type: object
+      example: ''
+      x-last-modified: 1599639204999
+  securitySchemes:
+    JWTAuth:
+      scheme: bearer
+      bearerFormat: JWT
+      type: http
+      description: >-
+        对于绝大多数请求，都将使用[JWT](https://tools.ietf.org/html/rfc7519)进行鉴权，同时提供了用户身份标识的功能。
+
+        Example: 
+
+        > Authorization: Bearer  <Token>
+      x-last-modified: 1599634517922
+  responses: {}
+  parameters: {}
+security:
+  - JWTAuth: []
+tags: []
+externalDocs: null

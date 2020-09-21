@@ -28,3 +28,6 @@ local.properties
 
 #Personal Project Directory
 personal/
+
+#Temporary Files
+~*

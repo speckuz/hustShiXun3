@@ -51,6 +51,12 @@ public class SceneryController {
         return APIReturn.successfulResult(sceneryMongoService.getFriendSceneries(page, userId));
     }
 
+    @GetMapping(path = "/scenery/getUserScenery")
+    public APIReturn getUserScenery(@RequestParam(name="page") int page,
+                                      @RequestParam(name="userId") Integer userId){
+        return APIReturn.successfulResult(sceneryMongoService.getPersonalSceneries(page, userId));
+    }
+
     @GetMapping(path = "/scenery/thumbUp")
     public APIReturn thumbUp(@RequestParam(name="sceneryId") String sceneryId,
                              @RequestHeader("Vini-User-Id") Integer userId){

@@ -109,6 +109,14 @@ public class SceneryMongoService {
         return mongoTemplate.find(sceneryQuery,SceneryPost.class);
     }
 
+    public List<SceneryPost> getPersonalSceneries(int pageNum,Integer userId){
+        Query sceneryQuery=new Query(Criteria.where("userId").is(userId));
+        sceneryQuery=sceneryQuery.skip(10*(pageNum-1)).limit(10);
+        Sort sort=Sort.by(Sort.Direction.DESC,"postTime");
+        sceneryQuery=sceneryQuery.with(sort);
+        return mongoTemplate.find(sceneryQuery,SceneryPost.class);
+    }
+
     public boolean thumbUp(String sceneryId,Integer userId){
         Query sceneryQuery=new Query(Criteria.where("_id").is(sceneryId));
         sceneryQuery.fields().include("_id");

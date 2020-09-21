@@ -56,7 +56,6 @@ public class TextHandler extends TextWebSocketHandler {
             savedMsgRepo.deleteByMsgId(msg.getMsgIndex());
         }
         pendingMsgRepo.deletePendingMsgsByTargetId(linkId);
-
     }
 
     @Override
@@ -111,7 +110,6 @@ public class TextHandler extends TextWebSocketHandler {
                     System.out.println(msgId + "号消息未发送给" + memberId + "号用户");
                 }
             }
-            session.sendMessage(new TextMessage(JSON.toJSONString(APIReturn.successfulResult(null))));
         }else{
             //获取到文本信息存储到SavedMsg(String id;Integer msgId;TextMessage msg;)的数据Collection中:
             User user = userRepo.findByUserId(targetId);
@@ -135,16 +133,20 @@ public class TextHandler extends TextWebSocketHandler {
                 pendingMsgRepo.save(new PendingMsg(targetId, msgId));
                 System.out.println(msgId + "号消息发送给" + targetId + "号用户");
             }
-            session.sendMessage(new TextMessage(JSON.toJSONString(APIReturn.successfulResult(null))));
         }
+        session.sendMessage(new TextMessage(JSON.toJSONString(APIReturn.successfulResult(null))));
 
     }
 
     @Override
-    public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
-        Object linkId = session.getAttributes().get("linkId");
-        SessionMap.removeSession((Integer)linkId);
-        System.out.println("连接关闭");
+    public void afterConnectionClosed(WebSocketSession session, CloseStatus status) {
+        try {
+            Object linkId = session.getAttributes().get("linkId");
+            SessionMap.removeSession((Integer)linkId);
+            System.out.println("连接关闭");
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
 }

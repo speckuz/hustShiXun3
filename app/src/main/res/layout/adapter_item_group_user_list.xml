@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/clicked"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_marginLeft="10dp"
+    android:layout_marginTop="10dp"
+    android:layout_height="wrap_content">
+    <ImageView
+        android:id="@+id/iv_group_members_head"
+        android:background="@drawable/sns"
+        android:layout_width="65dp"
+        android:layout_height="65dp"/>
+    <TextView
+        android:id="@+id/tv_members_name"
+        android:layout_marginLeft="10dp"
+        android:gravity="left"
+        android:layout_gravity="center"
+        android:text="123"
+        android:textColor="@color/black"
+        android:textSize="25dp"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"/>
+    <ImageButton
+        android:id="@+id/img_btn_delete_member"
+        android:layout_width="50dp"
+        android:layout_marginRight="10dp"
+        android:layout_height="match_parent"
+        android:background="@color/colorAlpha"
+        android:scaleType="fitCenter"
+        android:layout_gravity="center"
+        android:src="@drawable/ic_group_owner_delete_member"/>
+</LinearLayout>

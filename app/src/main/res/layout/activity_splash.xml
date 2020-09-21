@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    tools:context=".Splash">
+    tools:context=".others.Splash">
     <ImageView
         android:layout_margin="100dp"
         android:src="@drawable/sns"

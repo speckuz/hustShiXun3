@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
 
-    tools:context=".list.FriendList">
+    tools:context=".friendlist.FriendListActivity">
 
     <LinearLayout
 
@@ -18,7 +18,7 @@
         android:orientation="horizontal">
         <ImageButton
 
-            android:id="@+id/profilePicture"
+            android:id="@+id/img_btn_friend_profile_picture"
             android:src="@drawable/head"
             android:layout_width="50dp"
             android:layout_height="50dp"/>
@@ -34,23 +34,61 @@
             android:text="联系人"
             android:textColor="@color/black" />
         <ImageButton
-            android:id="@+id/addFriendOrGroup"
-            android:src="@drawable/add_friend_or_group"
+            android:id="@+id/img_btn_friend_add_friend_or_group"
+            android:src="@drawable/ic_add_friend_or_group"
             android:scaleType="fitCenter"
             android:background="@color/colorAlpha"
             android:layout_width="50dp"
             android:layout_height="50dp"/>
 
     </LinearLayout>
+    <LinearLayout
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="分组"
+            android:background="@drawable/shape_friend_list_showing"
+            android:id="@+id/tv_friend_by_group_show"
+            android:textColor="@color/black"
+            android:textSize="25dp"
+            android:layout_marginRight="50dp"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/tv_friend_show"
+            android:layout_width="wrap_content"
+            android:text="好友"
+            android:textSize="25dp"
+            android:layout_marginRight="50dp"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/tv_group_show"
+            android:layout_width="wrap_content"
+            android:text="群组"
+            android:textSize="25dp"
+            android:layout_height="wrap_content"/>
 
-    <ExpandableListView
-        android:id="@+id/friendList"
+    </LinearLayout>
+    <com.example.myapplication.friendlist.CustomFriendExpandableListView
+        android:id="@+id/lv_friend_by_group_list"
         android:layout_weight="1"
         android:layout_width="match_parent"
         android:layout_height="0dp">
 
-    </ExpandableListView>
-
+    </com.example.myapplication.friendlist.CustomFriendExpandableListView>
+    <ListView
+        android:visibility="gone"
+        android:id="@+id/lv_friend_list"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_height="0dp"/>
+    <com.example.myapplication.friendlist.CustomGroupExpandableListView
+        android:id="@+id/lv_group_list"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_height="0dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -59,25 +97,24 @@
         android:orientation="horizontal">
 
         <ImageButton
-            android:id="@+id/toChatList"
+            android:id="@+id/img_btn_friend_to_chat_list"
             android:background="@color/colorAlpha"
-            android:src="@drawable/recentchatlist0"
+            android:src="@drawable/ic_recent_chat_list_false"
             android:layout_width="140dp"
             android:scaleType="fitCenter"
             android:layout_height="50dp"/>
         <ImageButton
-            android:id="@+id/toFriendList"
             android:scaleType="fitCenter"
-            android:src="@drawable/friendlist1"
+            android:src="@drawable/ic_friend_list_true"
             android:layout_weight="1"
             android:background="@color/colorAlpha"
             android:layout_width="0dp"
             android:layout_height="50dp"/>
         <ImageButton
             android:background="@color/colorAlpha"
-            android:id="@+id/toMoment"
+            android:id="@+id/img_btn_friend_to_moment"
             android:scaleType="fitCenter"
-            android:src="@drawable/moment0"
+            android:src="@drawable/ic_moment_false"
             android:layout_width="140dp"
             android:layout_height="50dp"/>
     </LinearLayout>

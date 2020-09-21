@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
 
-    tools:context=".list.ChatList">
+    tools:context=".chatlist.ChatListActivity">
 
     <LinearLayout
         android:layout_marginLeft="10dp"
@@ -17,7 +17,7 @@
         android:orientation="horizontal">
         <ImageButton
 
-            android:id="@+id/profilePicture"
+            android:id="@+id/img_btn_chat_profile_picture"
             android:src="@drawable/head"
             android:layout_width="50dp"
             android:layout_height="50dp"/>
@@ -30,21 +30,51 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="recentChat"
+            android:text="最近聊天"
             android:textColor="@color/black" />
         <ImageButton
-            android:id="@+id/addFriendOrGroup"
-            android:src="@drawable/add_friend_or_group"
+            android:id="@+id/img_btn_chat_add_friend_or_group"
+            android:src="@drawable/ic_add_friend_or_group"
             android:scaleType="fitCenter"
             android:background="@color/colorAlpha"
             android:layout_width="50dp"
             android:layout_height="50dp"/>
 
     </LinearLayout>
+    <FrameLayout
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/et_chat_search"
+            android:layout_width="match_parent"
+            android:background="@drawable/shape_chat_message"
+            android:layout_height="wrap_content"/>
+        <LinearLayout
+            android:id="@+id/ll_chat_search"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_marginTop="2dp"
+                android:layout_width="40dp"
+                android:src="@drawable/ic_search_friend"
+                android:layout_height="40dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:textSize="30dp"
+                android:text="搜索"
+                android:layout_height="match_parent"/>
+        </LinearLayout>
+
+    </FrameLayout>
+
 
     <ListView
         android:background="@color/colorAlpha"
-        android:id="@+id/chatList"
+        android:id="@+id/lv_chat_list"
         android:layout_weight="1"
         android:layout_width="match_parent"
         android:layout_height="0dp">
@@ -53,31 +83,31 @@
 
 
     <LinearLayout
+        android:id="@+id/ll_chat_navigation_bar"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_gravity="bottom"
         android:orientation="horizontal">
 
         <ImageButton
-            android:id="@+id/toChatList"
             android:background="@color/colorAlpha"
-            android:src="@drawable/recentchatlist1"
+            android:src="@drawable/ic_recent_chat_list_true"
             android:layout_width="140dp"
             android:scaleType="fitCenter"
             android:layout_height="50dp"/>
         <ImageButton
-            android:id="@+id/toFriendList"
+            android:id="@+id/img_btn_chat_to_friend_list"
             android:scaleType="fitCenter"
-            android:src="@drawable/friendlist0"
+            android:src="@drawable/ic_friend_list_false"
             android:layout_weight="1"
             android:background="@color/colorAlpha"
             android:layout_width="0dp"
             android:layout_height="50dp"/>
         <ImageButton
             android:background="@color/colorAlpha"
-            android:id="@+id/toMoment"
+            android:id="@+id/img_btn_chat_to_moment"
             android:scaleType="fitCenter"
-            android:src="@drawable/moment0"
+            android:src="@drawable/ic_moment_false"
             android:layout_width="140dp"
             android:layout_height="50dp"/>
     </LinearLayout>

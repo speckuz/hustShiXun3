@@ -9,7 +9,7 @@
     android:background="@color/whitesmoke"
     android:orientation="vertical"
 
-    tools:context=".FriendInf">
+    tools:context=".checkinf.FriendInfActivity">
 
     <LinearLayout
         android:layout_marginTop="20dp"

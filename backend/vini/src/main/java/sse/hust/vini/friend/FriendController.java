@@ -138,6 +138,6 @@ public class FriendController {
                                  @RequestParam(value = "userId") Integer friendUserId)
     {
         FriendRelation fr=friendRepository.findByUserUserIdAndFriendUserId(myId, friendUserId);
-        return APIReturn.successfulResult(null==fr);
+        return APIReturn.successfulResult(null!=fr);
     }
 }

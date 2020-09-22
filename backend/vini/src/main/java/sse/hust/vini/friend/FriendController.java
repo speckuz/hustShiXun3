@@ -27,7 +27,7 @@ public class FriendController {
 
     @GetMapping(path = "/friend/getAll")
     public APIReturn findMyFriend(@RequestHeader(name = "Vini-User-Id") Integer userId){
-        List<PersonalFriend> friends=new ArrayList<PersonalFriend>();
+        List<PersonalFriend> friends=new ArrayList<>();
         List<FriendRelation> friendRelations=friendRepository.findAllByUserUserId(userId);
         for (FriendRelation relation:friendRelations) {
             if(!relation.getPendingConfirm()){
@@ -131,5 +131,13 @@ public class FriendController {
         friendRepository.deleteByUserUserIdAndFriendUserId(myId, friendUserId);
         friendRepository.deleteByUserUserIdAndFriendUserId(friendUserId,myId);
         return APIReturn.successfulResult(friendUserId);
+    }
+
+    @GetMapping(path = "/friend/isFriend")
+    public APIReturn judgeFriend(@RequestHeader(value = "Vini-User-Id") Integer myId,
+                                 @RequestParam(value = "userId") Integer friendUserId)
+    {
+        FriendRelation fr=friendRepository.findByUserUserIdAndFriendUserId(myId, friendUserId);
+        return APIReturn.successfulResult(null==fr);
     }
 }

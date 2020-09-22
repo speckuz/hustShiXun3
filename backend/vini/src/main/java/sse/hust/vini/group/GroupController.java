@@ -106,7 +106,7 @@ public class GroupController {
                 SessionMap.querySession(founderId).sendMessage(new TextMessage(JSON.toJSONStringWithDateFormat(msgJson,"yyyy-MM-dd HH:mm:ss")));
             }else{
                 SavedMsg msg=new SavedMsg(userId.toString(),0,new Date(),userId,founderId,
-                        4,null,null,null);
+                        4,null,null,groupId);
                 String msgId=savedMsgRepo.save(msg).getId();
                 pendingMsgRepo.save(new PendingMsg(founderId,msgId));
             }
@@ -281,7 +281,7 @@ public class GroupController {
     }
 
     //查询群内备注
-    @GetMapping("group/aliasList")
+    @GetMapping("/group/memberAlias")
     public APIReturn displayAllAlias(@RequestHeader(name = "Vini-User-Id") Integer userId,
                                      @RequestParam(name = "groupId") Integer groupId){
         Group group = groupRepo.getById(groupId);

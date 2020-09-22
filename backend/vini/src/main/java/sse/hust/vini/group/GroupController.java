@@ -321,4 +321,27 @@ public class GroupController {
         return APIReturn.successfulResult(groupAlias);
     }
 
+    @GetMapping("/group/userIn")
+    public APIReturn getOnesGroup(@RequestHeader(name="Vini-User-Id") Integer userId){
+        List<BiRecord> groups=biRepo.getAllByMemberId(userId);
+        ArrayList<Group> resGroup=new ArrayList<>();
+        groups.forEach(birec->{
+            groupRepo.findById(birec.getGroupId()).ifPresent(group->{
+                if(null!=birec.getGroupAlias()){
+                    group.setViniGroupName(birec.getGroupAlias());
+                }
+                group.setMembers(null);
+                group.setGroupThumbNail(null);
+                resGroup.add(group);
+            });
+        });
+        return APIReturn.successfulResult(resGroup);
+    }
+
+    @PostMapping("/group/batchQuery")
+    public APIReturn batchQueryGroup(@RequestBody List<Integer> groupIds){
+        ArrayList<Group> groups=new ArrayList<>();
+        groupIds.forEach(gId->groupRepo.findById(gId).ifPresent(groups::add));
+        return APIReturn.successfulResult(groups);
+    }
 }

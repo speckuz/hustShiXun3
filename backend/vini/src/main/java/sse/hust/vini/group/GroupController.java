@@ -46,8 +46,6 @@ public class GroupController {
         group.getMembers().add(founderId);
         Group savedGroup = groupRepo.save(group);
         BiRecord biRecord = new BiRecord(founderId, group.getId(), true);
-        biRecord.setMemberAlias(userRepo.findByUserId(founderId).getNickname());
-        biRecord.setGroupAlias(savedGroup.getViniGroupName());
         biRepo.save(biRecord);
         return APIReturn.successfulResult(savedGroup);
     }
@@ -136,8 +134,6 @@ public class GroupController {
             return APIReturn.apiError(400, "Already passed before!");
         }
         request.setConfirmed(true);
-        request.setGroupAlias(group.getViniGroupName());
-        request.setMemberAlias(userRepo.findByUserId(requestId).getNickname());
         group.getMembers().add(requestId);
         biRepo.save(request);
         return APIReturn.successfulResult(null);
@@ -286,6 +282,7 @@ public class GroupController {
                                      @RequestParam(name = "groupId") Integer groupId){
         Group group = groupRepo.getById(groupId);
         HashMap<Integer, String> aliasMap = new HashMap<>();
+        ArrayList<Integer> unaliased=new ArrayList<>();
         //用户是否存在
         if (null == userRepo.findByUserId(userId)) {
             return APIReturn.apiError(400, "User Not Exists!");
@@ -299,8 +296,14 @@ public class GroupController {
             return APIReturn.apiError(400, "unknown user to the group.");
         }
         for(Integer memberId:group.getMembers()){
-            aliasMap.put(memberId, biRepo.getByGroupIdAndMemberId(groupId,memberId).getMemberAlias());
+            BiRecord rec=biRepo.getByGroupIdAndMemberId(groupId,memberId);
+            if(null==rec.getMemberAlias()){
+                unaliased.add(rec.getMemberId());
+            }else{
+                aliasMap.put(memberId, rec.getMemberAlias());
+            }
         }
+        userRepo.findAllByUserIdIn(unaliased).forEach(x->aliasMap.put(x.getUserId(), x.getNickname()));
         return APIReturn.successfulResult(aliasMap);
     }
 
@@ -318,6 +321,9 @@ public class GroupController {
             return APIReturn.apiError(400, "Group Not Exists!");
         }
         String groupAlias = biRepo.getByGroupIdAndMemberId(groupId,groupId).getGroupAlias();
+        if(null==groupAlias){
+            groupAlias=groupRepo.getById(groupId).getViniGroupName();
+        }
         return APIReturn.successfulResult(groupAlias);
     }
 

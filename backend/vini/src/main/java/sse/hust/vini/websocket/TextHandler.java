@@ -48,6 +48,8 @@ public class TextHandler extends TextWebSocketHandler {
         //检查之前是否有离线消息
         Integer linkId = (Integer) session.getAttributes().get("linkId");
         SessionMap.addSession(linkId, session);
+        //Set the max limit for text message.
+        session.setTextMessageSizeLimit(10485760);
         System.out.println(linkId+"接入连接池，寻找可能的残留信息");
         List<PendingMsg> tempMsgIds = pendingMsgRepo.getPendingMsgsByTargetId(linkId);
         for(PendingMsg msg:tempMsgIds){

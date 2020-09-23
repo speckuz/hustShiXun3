@@ -323,7 +323,7 @@ public class GroupController {
 
     @GetMapping("/group/userIn")
     public APIReturn getOnesGroup(@RequestHeader(name="Vini-User-Id") Integer userId){
-        List<BiRecord> groups=biRepo.getAllByMemberId(userId);
+        List<BiRecord> groups=biRepo.getAllByMemberIdAndConfirmed(userId,true);
         ArrayList<Group> resGroup=new ArrayList<>();
         groups.forEach(birec->{
             groupRepo.findById(birec.getGroupId()).ifPresent(group->{

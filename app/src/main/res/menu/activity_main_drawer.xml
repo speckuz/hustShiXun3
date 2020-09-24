@@ -4,21 +4,19 @@
     tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single">
+
         <item
             android:id="@+id/nav_chat"
             android:icon="@drawable/ic_menu_camera"
             android:title="@string/menu_chat" />
         <item
+            android:id="@+id/nav_setting"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="@string/menu_setting" />
+        <item
             android:id="@+id/nav_photo"
             android:icon="@drawable/ic_menu_gallery"
             android:title="@string/menu_photo" />
-        <item
-            android:id="@+id/nav_vinispace"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="@string/menu_vinispace" />
-        <item
-            android:id="@+id/nav_friends"
-            android:icon="@android:drawable/ic_menu_my_calendar"
-            android:title="@string/menu_friends" />
+
     </group>
 </menu>

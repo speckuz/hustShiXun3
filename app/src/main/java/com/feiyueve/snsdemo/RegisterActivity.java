@@ -3,12 +3,10 @@ package com.feiyueve.snsdemo;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,17 +17,11 @@ import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.codec.digest.DigestUtils;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
 
-import webservice.WebService;
+import com.feiyueve.snsdemo.dao.RegisterData;
+import com.feiyueve.snsdemo.webservice.WebService;
 
 
 public class RegisterActivity extends AppCompatActivity {
@@ -108,7 +100,7 @@ public class RegisterActivity extends AppCompatActivity {
                             public void run() {
                                 String result = null;
                                 try {
-                                    result = new WebService().uploadData("http://218.244.151.221:8080/user/create", content);
+                                    result = new WebService().uploadData("http://218.244.151.221:8080/user/create", null,content);
                                 } catch (IOException e) {
                                     e.printStackTrace();
                                 }
@@ -140,7 +132,7 @@ public class RegisterActivity extends AppCompatActivity {
                         public void run() {
                             try {
                                 String p = null;
-                                p = WebService.getByURL("http://218.244.151.221:8080/user/exists", data);
+                                p = WebService.getByURL("http://218.244.151.221:8080/user/exists", data,null);
                                 Message msg = myHandler.obtainMessage();
                                 msg.obj = p;//发送context上下文
                                 msg.what = 1;

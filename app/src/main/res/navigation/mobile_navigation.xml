@@ -12,20 +12,15 @@
         tools:layout="@layout/fragment_chat" />
 
     <fragment
+        android:id="@+id/nav_setting"
+        android:name="com.feiyueve.snsdemo.ui.setting.SettingFragment"
+        android:label="@string/menu_setting"
+        tools:layout="@layout/fragment_setting" />
+
+    <fragment
         android:id="@+id/nav_photo"
         android:name="com.feiyueve.snsdemo.ui.photo.PhotoFragment"
         android:label="@string/menu_photo"
-        tools:layout="@layout/fragment_photo" />
+        tools:layout="@layout/fragment_setting" />
 
-    <fragment
-        android:id="@+id/nav_vinispace"
-        android:name="com.feiyueve.snsdemo.ui.vinispace.ViniSpaceFragment"
-        android:label="@string/menu_vinispace"
-        tools:layout="@layout/fragment_vinispace" />
-
-    <fragment
-        android:id="@+id/nav_friends"
-        android:name="com.feiyueve.snsdemo.ui.friends.FriendsFragment"
-        android:label="@string/menu_friends"
-        tools:layout="@layout/fragment_friends" />
 </navigation>

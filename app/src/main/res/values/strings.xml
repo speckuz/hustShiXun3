@@ -10,6 +10,7 @@
 
     <string name="menu_chat">聊天</string>
     <string name="menu_photo">相册</string>
+    <string name="menu_setting">设置</string>
     <string name="menu_friends">好友</string>
     <string name="menu_vinispace">空间</string>
 </resources>

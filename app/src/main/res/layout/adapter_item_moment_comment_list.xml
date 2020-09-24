@@ -1,32 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
+    android:layout_width="match_parent"
     android:orientation="horizontal"
     android:layout_height="match_parent">
-
-    <TextView
-        android:id="@+id/tv_comment_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20dp"
-        android:textColor="@color/blue"
-        android:text="傲哥哥的小迷弟"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20dp"
-        android:textColor="@color/blue"
-        android:text="： "/>
     <TextView
         android:id="@+id/tv_comment"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
+        android:layout_weight="1"
         android:layout_height="wrap_content"
-        android:textColor="@color/black"
         android:textSize="20dp"
-        android:layout_marginRight="10dp"
-        android:text="爱你sdhhushdushdjshkjdhskjdhjkshdjshdjkshkjdsjkdhkjjdsjhdkjah"/>
-
-
-
+        android:textColor="@color/black"
+        android:text="傲哥哥的小迷弟:"/>
+    <ImageButton
+        android:id="@+id/img_btn_delete_comment"
+        android:src="@drawable/ic_group_owner_delete_member"
+        android:scaleType="fitXY"
+        android:layout_marginRight="20dp"
+        android:background="@color/colorAlpha"
+        android:layout_width="30dp"
+        android:layout_height="30dp"/>
 </LinearLayout>

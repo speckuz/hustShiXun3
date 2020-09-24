@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:background="@color/whitesmoke"
-    tools:context=".friendlist.GroupMembersList"
+    tools:context=".group.GroupMembersList"
     android:layout_height="match_parent">
     <LinearLayout
 

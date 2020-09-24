@@ -114,7 +114,7 @@ public class CustomFriendExpandableListView extends ExpandableListView {
                     System.out.println("jsdfsudhfusdhfuhsdufhdsouhu");
                     Intent intent = new Intent(context, FriendInfActivity.class);
                     Bundle bundle=new Bundle();
-                    bundle.putString("id", friend.getId());
+                    //bundle.putString("id", friend.getId());
                     intent.putExtras(bundle);
                     context.startActivity(intent);
                 }

@@ -1,4 +1,4 @@
-package com.example.myapplication.friendlist;
+package com.example.myapplication.group;
 
 import android.os.Bundle;
 import android.widget.ImageView;
@@ -8,6 +8,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapplication.R;
+import com.example.myapplication.group.GroupMembersAdapter;
 import com.example.myapplication.inf.Group;
 
 public class GroupMembersList extends AppCompatActivity {

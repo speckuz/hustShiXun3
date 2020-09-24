@@ -75,7 +75,7 @@ public class FriendByGroupListAdapter extends BaseExpandableListAdapter {
         final Friend friendList = friendLists.get(i).get(i1);
         view = layoutInflater.inflate(R.layout.activity_friend,null);
         TextView friendName = (TextView) view.findViewById(R.id.tv_friend_by_group_name);
-        friendName.setText(friendList.getFriendText());
+        friendName.setText(friendList.getFriendName());
         TextView friendText = (TextView) view.findViewById(R.id.tv_friend_by_group_text);
         friendText.setText(friendList.getFriendText());
         return view;

@@ -15,12 +15,16 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.myapplication.inf.Comment;
 import com.example.myapplication.inf.Moment;
 
 import com.example.myapplication.R;
+import com.example.myapplication.webService.SceneryWebService;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.TimeZone;
 
 public class MomentAdapter extends BaseAdapter {
 
@@ -28,12 +32,14 @@ public class MomentAdapter extends BaseAdapter {
     private Context context;
     private LayoutInflater layoutInflater;
     private Activity activity;
+    private SceneryWebService sceneryWebService;
 
     public MomentAdapter(ArrayList<Moment> moments, Context context,Activity activity){
         this.moments = moments;
         this.context = context;
         this.layoutInflater = LayoutInflater.from(context);
         this.activity = activity;
+
     }
     @Override
     public int getCount() {
@@ -61,23 +67,58 @@ public class MomentAdapter extends BaseAdapter {
         holder.tvUserName = (TextView) view.findViewById(R.id.userName);
         holder.tvTime = (TextView) view.findViewById(R.id.time);
         holder.imgBtnLike = (ImageButton) view.findViewById(R.id.like);
-        holder.imgBtnComment = (ImageButton) view.findViewById(R.id.tv_comment);
+        holder.imgBtnComment = (ImageButton) view.findViewById(R.id.img_btn_comment_moment);
         holder.lvCommentList = (ListView) view.findViewById(R.id.lv_comment_list);
         holder.tvLikeUserName = (TextView) view.findViewById(R.id.tv_moment_like_user_name);
+        holder.imgBtnDelete = (ImageButton) view.findViewById(R.id.img_btn_delete_moment);
         holder.tvContent.setText(content);
         holder.tvUserName.setText(userName);
-        holder.tvTime.setText(time);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
+        try {
+            Date date = simpleDateFormat.parse(time);
+            SimpleDateFormat bjSdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            bjSdf.setTimeZone(TimeZone.getTimeZone("Asia/Shanghai"));
+            String bjDate = bjSdf.format(date);
+            holder.tvTime.setText(bjDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
         ArrayList<String> likeUserName = moments.get(i).getLikeUserName();
         StringBuilder strB = new StringBuilder();
         if(likeUserName != null){
             for(int j = 0;j < likeUserName.size();j++){
                 strB.append(likeUserName.get(j));
-                holder.tvLikeUserName.setText(strB.toString());
             }
         }
-        holder.adapter = new CommentAdapter(moments.get(i).getComments(),context,activity);
+        holder.tvLikeUserName.setText(strB.toString());
+        holder.adapter = new CommentAdapter(moments.get(i).getMomentId(),moments,moments.get(i).getComments(),context,activity,this);
         holder.lvCommentList.setAdapter(holder.adapter);
 
+
+        if(moments.get(i).getUserId() == 2){
+            holder.imgBtnDelete.setVisibility(View.VISIBLE);
+            holder.imgBtnDelete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            sceneryWebService = new SceneryWebService();
+                            sceneryWebService.deleteScenery(moments.get(i).getMomentId());
+                            moments = sceneryWebService.getWorldScenery(1+"",2);
+                            activity.runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    notifyDataSetChanged();
+                                }
+                            });
+
+                        }
+                    }).start();
+                }
+            });
+        }
 
 
         holder.imgBtnComment.setOnClickListener(new View.OnClickListener(){
@@ -90,11 +131,26 @@ public class MomentAdapter extends BaseAdapter {
                 holder.dialog.imgBtnSendComment.setOnClickListener(new View.OnClickListener(){
                     @Override
                     public void onClick(View view) {
-                        String comment = holder.dialog.etCommentMessage.getText().toString();
+                        final String comment = holder.dialog.etCommentMessage.getText().toString();
                         if(comment != null){
+                            new Thread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    sceneryWebService = new SceneryWebService();
+                                    sceneryWebService.comment(moments.get(i).getMomentId(),comment,0);
+                                    moments = sceneryWebService.getWorldScenery(1+"",2);
+                                    activity.runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            notifyDataSetChanged();
+                                        }
+                                    });
 
-                            moments.get(i).getComments().add(new Comment(moments.get(i).getComments().size()+1,0,moments.get(i).getComments().size()+1,comment));
-                            System.out.println(i);
+                                }
+                            }).start();
+
+
+                            //moments.get(i).getComments().add(new Comment(moments.get(i).getComments().size()+1,0,moments.get(i).getComments().size()+1,comment));
                             holder.dialog.dismiss();
                         }
                     }
@@ -111,11 +167,48 @@ public class MomentAdapter extends BaseAdapter {
 
                 if(moments.get(i).getLike()){
                     moments.get(i).setLike(false);
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            if(sceneryWebService == null)
+                                sceneryWebService = new SceneryWebService();
+                            sceneryWebService.dislikeMoment(moments.get(i).getMomentId());
+                            ArrayList<Moment> momentsTemp = sceneryWebService.getWorldScenery(1+"",2);
+                            moments.clear();
+                            moments.addAll(momentsTemp);
+                            activity.runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    notifyDataSetChanged();
+                                }
+                            });
+                        }
+                    }).start();
                     holder.imgBtnLike.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_moment_like_false));
+
                 }else {
                     moments.get(i).setLike(true);
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            if(sceneryWebService == null)
+                                sceneryWebService = new SceneryWebService();
+                            sceneryWebService.likeMoment(moments.get(i).getMomentId());
+                            ArrayList<Moment> momentsTemp = sceneryWebService.getWorldScenery(1+"",2);
+                            moments.clear();
+                            moments.addAll(momentsTemp);
+                            activity.runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    notifyDataSetChanged();
+                                }
+                            });
+
+                        }
+                    }).start();
                     holder.imgBtnLike.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_moment_like_true));
                 }
+
             }
         });
 
@@ -138,6 +231,23 @@ public class MomentAdapter extends BaseAdapter {
         public TextView tvLikeUserName;
         public CommentDialog dialog;
         public ListAdapter adapter;
+        public ImageButton imgBtnDelete;
+    }
+    private void refresh(){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                sceneryWebService = new SceneryWebService();
+                moments = sceneryWebService.getWorldScenery(1+"",2);
+                activity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        notifyDataSetChanged();
+                    }
+                });
+
+            }
+        }).start();
     }
 }
 

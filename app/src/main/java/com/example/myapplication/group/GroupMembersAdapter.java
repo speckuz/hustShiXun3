@@ -1,4 +1,4 @@
-package com.example.myapplication.friendlist;
+package com.example.myapplication.group;
 
 import android.content.Context;
 import android.view.LayoutInflater;

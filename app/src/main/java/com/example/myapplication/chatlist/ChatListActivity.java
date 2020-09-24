@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
+import com.example.myapplication.checkinf.InterestActivity;
 import com.example.myapplication.others.AddFriendOrGroupActivity;
 import com.example.myapplication.chat.ChatActivity;
 import com.example.myapplication.checkinf.MineActivity;
@@ -124,7 +125,7 @@ public class ChatListActivity extends AppCompatActivity {
         imgBtnProfilePicture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(ChatListActivity.this, MineActivity.class));
+                startActivity(new Intent(ChatListActivity.this, InterestActivity.class));
                 overridePendingTransition(R.anim.in_from_left, R.anim.out_to_right);
             }
         });
@@ -146,7 +147,7 @@ public class ChatListActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(ChatListActivity.this, MyMomentActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putString("id", "mine");
+                bundle.putInt("id", 0);
                 intent.putExtras(bundle);
                 startActivity(intent);
                 overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);

@@ -83,7 +83,7 @@
         android:layout_width="match_parent"
         android:layout_weight="1"
         android:layout_height="0dp"/>
-    <com.example.myapplication.friendlist.CustomGroupExpandableListView
+    <ListView
         android:id="@+id/lv_group_list"
         android:visibility="gone"
         android:layout_width="match_parent"

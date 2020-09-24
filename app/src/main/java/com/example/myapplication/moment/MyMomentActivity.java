@@ -2,12 +2,16 @@ package com.example.myapplication.moment;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -17,17 +21,22 @@ import com.example.myapplication.inf.Comment;
 import com.example.myapplication.inf.Moment;
 
 import com.example.myapplication.R;
+import com.example.myapplication.webService.SceneryWebService;
 
 public class MyMomentActivity extends AppCompatActivity {
 
 
     private ImageButton imgBtnToFriendList;
     private ImageButton imgBtnToChatList;
-    private String id;
+    private ImageButton imgBtnPostMoment;
+    private LinearLayout llBar;
+    private int id;
     private ArrayList<Moment> moments;
     private ListView lvMomentList;
     private BaseAdapter adapter;
-
+    private SceneryWebService sceneryWebService;
+    private Context context;
+    private Activity activity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,52 +47,97 @@ public class MyMomentActivity extends AppCompatActivity {
     public void initView(){
         imgBtnToChatList = (ImageButton) findViewById(R.id.img_btn_moment_to_chat_list);
         imgBtnToFriendList = (ImageButton) findViewById(R.id.img_btn_moment_to_friend_list);
-
+        imgBtnPostMoment = (ImageButton) findViewById(R.id.img_btn_post_moment);
+        llBar = (LinearLayout) findViewById(R.id.ll_bar);
+        context = this;
+        activity = this;
         Bundle bundle = this.getIntent().getExtras();
-        id = bundle.getString("id");
+        id = bundle.getInt("id");
         System.out.println(id);
         lvMomentList = (ListView) findViewById(R.id.lv_moment_list);
-        moments = new ArrayList<Moment>();
 
-        ArrayList<Comment> comments1 = new ArrayList<Comment>();
-        ArrayList<Comment> comments2 = new ArrayList<Comment>();
-        ArrayList<Comment> comments3 = new ArrayList<Comment>();
+        if(id == 0){
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    if(sceneryWebService == null)
+                        sceneryWebService = new SceneryWebService();
+                    moments = new ArrayList<Moment>();
+                    moments = sceneryWebService.getWorldScenery(1+"",2);
+                    adapter = new MomentAdapter(moments,context,activity);
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            lvMomentList.setAdapter(adapter);
+                        }
+                    });
+                }
+            }).start();
+        }else if(id == -1){
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    if(sceneryWebService == null)
+                        sceneryWebService = new SceneryWebService();
+                    moments = new ArrayList<Moment>();
+                    //moments = sceneryWebService.getWorldScenery(1+"",2);
+                    adapter = new MomentAdapter(moments,context,activity);
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            lvMomentList.setAdapter(adapter);
+                        }
+                    });
+                }
+            }).start();
+        }else{
+            llBar.setVisibility(View.GONE);
+            imgBtnPostMoment.setVisibility(View.GONE);
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    if(sceneryWebService == null)
+                        sceneryWebService = new SceneryWebService();
+                    moments = new ArrayList<Moment>();
+                    //moments = sceneryWebService.getWorldScenery(1+"",2);
+                    moments = sceneryWebService.getOneFriendScenery(1+"",2,id);
+                    adapter = new MomentAdapter(moments,context,activity);
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            lvMomentList.setAdapter(adapter);
+                        }
+                    });
+                }
+            }).start();
 
-        comments1.add(new Comment(1,0,1,"澳哥哥"));
-        comments2.add(new Comment(1,0,1,"澳哥哥"));
-        comments3.add(new Comment(1,0,1,"澳哥哥"));
-        comments1.add(new Comment(2,0,2,"澳哥哥"));
-        comments2.add(new Comment(2,0,2,"澳哥哥"));
-        comments3.add(new Comment(2,0,2,"澳哥哥"));
-        comments1.add(new Comment(3,1,3,"澳哥哥"));
-        comments2.add(new Comment(3,2,3,"澳哥哥"));
-        comments3.add(new Comment(3,1,3,"澳哥哥"));
+        }
 
+        imgBtnPostMoment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if(sceneryWebService == null)
+                            sceneryWebService = new SceneryWebService();
+                        sceneryWebService.postScenery("123",null);
+                        ArrayList<Moment> momentsTemp = sceneryWebService.getWorldScenery(1+"",2);
+                        moments.clear();
+                        moments.addAll(momentsTemp);
 
-        ArrayList<String> likeUserName = new ArrayList<String>();
-        likeUserName.add("迷弟1");
-        likeUserName.add("迷弟12");
-        likeUserName.add("迷弟122");
-        likeUserName.add("迷弟1222");
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                System.out.println("adsidjsijdisjdis");
+                                ((BaseAdapter) adapter).notifyDataSetChanged();
+                            }
+                        });
 
-        ArrayList<String> likeUserName1 = new ArrayList<String>();
-        likeUserName1.add("迷弟1");
-        likeUserName1.add("迷弟12");
-        likeUserName1.add("迷弟122");
-        likeUserName1.add("迷弟1222");
-
-        ArrayList<String> likeUserName2 = new ArrayList<String>();
-        likeUserName2.add("迷弟1");
-        likeUserName2.add("迷弟12");
-        likeUserName2.add("迷弟122");
-        likeUserName2.add("迷弟1222");
-
-        moments.add(new Moment("leo","1","今天好开心","2019.01.01 12：30",false,likeUserName,comments1));
-        moments.add(new Moment("leo","1","我爱夏天","2019.01.01 12：30",true,likeUserName1,comments2));
-        moments.add(new Moment("leo","1","我不喜欢吃柑橘","2019.01.01 12：30",false,likeUserName2,comments3));
-
-        adapter = new MomentAdapter(moments,this,this);
-        lvMomentList.setAdapter(adapter);
+                    }
+                }).start();
+            }
+        });
 
         imgBtnToChatList.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,4 +157,5 @@ public class MyMomentActivity extends AppCompatActivity {
             }
         });
     }
+
 }

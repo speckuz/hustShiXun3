@@ -29,9 +29,9 @@
         <activity android:name=".moment.MyMomentActivity" />
         <activity android:name=".friendlist.FriendListActivity" />
         <activity android:name=".checkinf.FriendInfActivity" />
-        <activity android:name=".checkinf.GroupInfActivity" />
+        <activity android:name=".group.GroupInfActivity" />
         <activity android:name=".checkinf.MineActivity" />
-        <activity android:name=".friendlist.GroupMembersList" />
+        <activity android:name=".group.GroupMembersList" />
         <activity android:name=".chatlist.ChatListActivity" />
         <activity android:name=".chat.ChatActivity" />
         <activity android:name=".others.MainActivity" />

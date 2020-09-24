@@ -29,7 +29,7 @@
 
 
     <LinearLayout
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         android:layout_marginRight="20dp"
         android:layout_marginLeft="20dp"
         android:layout_width="match_parent"
@@ -65,7 +65,7 @@
 
 
     <LinearLayout
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="40dp"
         android:layout_marginRight="20dp"
         android:layout_marginLeft="20dp"
         android:layout_width="match_parent"
@@ -91,11 +91,172 @@
 
         <ImageButton
             android:id="@+id/img_btn_search_group"
-            android:src="@drawable/ic_search_group"
+            android:src="@drawable/ic_search_friend"
             android:scaleType="fitCenter"
             android:layout_gravity="center"
             android:background="@color/colorAlpha"
             android:layout_width="40dp"
             android:layout_height="40dp"/>
     </LinearLayout>
+    <LinearLayout
+        android:layout_marginTop="40dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:gravity="bottom"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/tv_create_group"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textSize="30dp"
+            android:text="新建群组"/>
+
+        <EditText
+            android:id="@+id/et_new_group_name"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:textColor="#000" />
+
+
+        <ImageButton
+            android:id="@+id/img_btn_new_group"
+            android:src="@drawable/ic_new_group"
+            android:scaleType="fitCenter"
+            android:layout_gravity="center"
+            android:background="@color/colorAlpha"
+            android:layout_width="40dp"
+            android:layout_height="40dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="40dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:gravity="bottom"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_recommend_new_friend"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textSize="30dp"
+            android:text="推荐好友"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:textColor="#000" />
+
+
+        <ImageButton
+            android:id="@+id/img_btn_refresh_commend"
+            android:src="@drawable/ic_refresh_commend"
+            android:scaleType="fitCenter"
+            android:layout_gravity="center"
+            android:background="@color/colorAlpha"
+            android:layout_width="40dp"
+            android:layout_height="40dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_clicked1"
+        android:layout_width="fill_parent"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/iv_friend1_recommend_head"
+            android:background="@drawable/sns"
+            android:layout_width="65dp"
+            android:layout_height="65dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_marginLeft="10dp"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tv_friend1_recommend_name"
+                android:gravity="center_vertical"
+                android:textColor="@color/black"
+                android:textSize="25dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/tv_friend1_recommend_sign"
+                android:gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/ll_clicked2"
+        android:layout_width="fill_parent"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/iv_friend2_recommend_head"
+            android:background="@drawable/sns"
+            android:layout_width="65dp"
+            android:layout_height="65dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_marginLeft="10dp"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tv_friend2_recommend_name"
+                android:gravity="center_vertical"
+                android:textColor="@color/black"
+                android:textSize="25dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/tv_friend2_recommend_sign"
+                android:gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/ll_clicked3"
+        android:layout_width="fill_parent"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/iv_friend3_recommend_head"
+            android:background="@drawable/sns"
+            android:layout_width="65dp"
+            android:layout_height="65dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_marginLeft="10dp"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tv_friend3_recommend_name"
+                android:gravity="center_vertical"
+                android:textColor="@color/black"
+                android:textSize="25dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/tv_friend3_recommend_sign"
+                android:gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </LinearLayout>
+
 </LinearLayout>

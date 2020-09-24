@@ -14,15 +14,19 @@
         android:layout_height="wrap_content"/>
 
     <LinearLayout
+        android:layout_marginTop="30dp"
+        android:layout_marginHorizontal="10dp"
         android:layout_width="match_parent"
         android:orientation="horizontal"
-        android:layout_height="wrap_content">
+        android:layout_weight="1"
+        android:layout_height="0dp">
         <LinearLayout
             android:gravity="center"
             android:layout_width="100dp"
             android:orientation="vertical"
             android:layout_height="wrap_content">
             <TextView
+                android:id="@+id/interest1"
                 android:layout_width="wrap_content"
                 android:text="吃饭"
                 android:textSize="20dp"
@@ -30,25 +34,46 @@
                 android:textColor="@color/black"
                 android:layout_height="wrap_content"/>
             <TextView
+                android:id="@+id/interest2"
                 android:layout_marginTop="10dp"
                 android:layout_width="wrap_content"
-                android:text="吃饭"
+                android:text="阅读"
                 android:textSize="20dp"
                 android:background="@drawable/shape_chat_message"
                 android:textColor="@color/black"
                 android:layout_height="wrap_content"/>
             <TextView
+                android:id="@+id/interest3"
                 android:layout_marginTop="10dp"
                 android:layout_width="wrap_content"
-                android:text="吃饭"
+                android:text="旅游"
                 android:textSize="20dp"
                 android:background="@drawable/shape_chat_message"
                 android:textColor="@color/black"
                 android:layout_height="wrap_content"/>
             <TextView
+                android:id="@+id/interest4"
                 android:layout_marginTop="10dp"
                 android:layout_width="wrap_content"
-                android:text="吃饭"
+                android:text="游戏"
+                android:textSize="20dp"
+                android:background="@drawable/shape_chat_message"
+                android:textColor="@color/black"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/interest5"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:text="跳舞"
+                android:textSize="20dp"
+                android:background="@drawable/shape_chat_message"
+                android:textColor="@color/black"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/interest6"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:text="动漫"
                 android:textSize="20dp"
                 android:background="@drawable/shape_chat_message"
                 android:textColor="@color/black"
@@ -63,6 +88,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content">
             <TextView
+                android:id="@+id/interest7"
                 android:layout_width="wrap_content"
                 android:text="睡觉"
                 android:textSize="20dp"
@@ -70,25 +96,46 @@
                 android:textColor="@color/black"
                 android:layout_height="wrap_content"/>
             <TextView
+                android:id="@+id/interest8"
                 android:layout_marginTop="10dp"
                 android:layout_width="wrap_content"
-                android:text="吃饭"
+                android:text="运动"
                 android:textSize="20dp"
                 android:background="@drawable/shape_chat_message"
                 android:textColor="@color/black"
                 android:layout_height="wrap_content"/>
             <TextView
+                android:id="@+id/interest9"
                 android:layout_marginTop="10dp"
                 android:layout_width="wrap_content"
-                android:text="吃饭"
+                android:text="小说"
                 android:textSize="20dp"
                 android:background="@drawable/shape_chat_message"
                 android:textColor="@color/black"
                 android:layout_height="wrap_content"/>
             <TextView
+                android:id="@+id/interest10"
                 android:layout_marginTop="10dp"
                 android:layout_width="wrap_content"
-                android:text="吃饭"
+                android:text="社交"
+                android:textSize="20dp"
+                android:background="@drawable/shape_chat_message"
+                android:textColor="@color/black"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/interest11"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:text="种植"
+                android:textSize="20dp"
+                android:background="@drawable/shape_chat_message"
+                android:textColor="@color/black"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/interest12"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:text="摄影"
                 android:textSize="20dp"
                 android:background="@drawable/shape_chat_message"
                 android:textColor="@color/black"
@@ -101,6 +148,7 @@
             android:layout_width="100dp"
             android:layout_height="wrap_content">
             <TextView
+                android:id="@+id/interest13"
                 android:layout_width="wrap_content"
                 android:text="音乐"
                 android:textSize="20dp"
@@ -108,32 +156,63 @@
                 android:textColor="@color/black"
                 android:layout_height="wrap_content"/>
             <TextView
+                android:id="@+id/interest14"
                 android:layout_marginTop="10dp"
                 android:layout_width="wrap_content"
-                android:text="吃饭"
+                android:text="电影"
                 android:textSize="20dp"
                 android:background="@drawable/shape_chat_message"
                 android:textColor="@color/black"
                 android:layout_height="wrap_content"/>
             <TextView
+                android:id="@+id/interest15"
                 android:layout_marginTop="10dp"
                 android:layout_width="wrap_content"
-                android:text="吃饭"
+                android:text="电视剧"
                 android:textSize="20dp"
                 android:background="@drawable/shape_chat_message"
                 android:textColor="@color/black"
                 android:layout_height="wrap_content"/>
             <TextView
+                android:id="@+id/interest16"
                 android:layout_marginTop="10dp"
                 android:layout_width="wrap_content"
-                android:text="吃饭"
+                android:text="绘画"
+                android:textSize="20dp"
+                android:background="@drawable/shape_chat_message"
+                android:textColor="@color/black"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/interest17"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:text="烹饪"
+                android:textSize="20dp"
+                android:background="@drawable/shape_chat_message"
+                android:textColor="@color/black"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/interest18"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:text="追星"
                 android:textSize="20dp"
                 android:background="@drawable/shape_chat_message"
                 android:textColor="@color/black"
                 android:layout_height="wrap_content"/>
         </LinearLayout>
     </LinearLayout>
-
+    <Button
+        android:id="@+id/btn_confirm_interests"
+        android:layout_marginBottom="50dp"
+        android:background="@drawable/shape_chat_message"
+        android:layout_width="match_parent"
+        android:layout_gravity="bottom"
+        android:layout_marginHorizontal="20dp"
+        android:textSize="20dp"
+        android:text="确定选择"
+        android:textColor="@color/black"
+        android:layout_height="wrap_content"/>
 
 <!--    <LinearLayout-->
 <!--        android:layout_width="match_parent"-->

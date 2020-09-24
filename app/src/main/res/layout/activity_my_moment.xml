@@ -18,8 +18,9 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="vini动态"
-            android:textColor="@color/cadetblue" />
+            android:textColor="@color/black" />
         <ImageButton
+            android:id="@+id/img_btn_post_moment"
             android:src="@drawable/ic_release_moment"
             android:scaleType="fitCenter"
             android:layout_gravity="right"
@@ -29,6 +30,10 @@
     </FrameLayout>
 
     <ListView
+        android:divider="#00000000"
+        android:dividerHeight="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:id="@+id/lv_moment_list"
         android:layout_weight="1"
         android:layout_width="match_parent"
@@ -38,6 +43,7 @@
 
 
     <LinearLayout
+        android:id="@+id/ll_bar"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_gravity="bottom"
